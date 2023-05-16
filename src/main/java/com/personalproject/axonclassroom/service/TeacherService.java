@@ -1,33 +1,19 @@
 package com.personalproject.axonclassroom.service;
 
 import com.personalproject.axonclassroom.entity.Teacher;
-import com.personalproject.axonclassroom.repository.TeacherRepository;
+import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherDTO;
-import com.personalproject.axonclassroom.service.mapper.TeacherMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class TeacherService {
-    private final TeacherRepository teacherRepository;
+public interface TeacherService {
+    List<TeacherDTO> getAllTeachers();
 
-    public List<TeacherDTO> getAllTeachers() {
-        return TeacherMapper.TEACHER_MAPPER.toDtos(teacherRepository.findAll());
-    }
+    TeacherDTO createTeacher(TeacherCreatingDTO teacherCreatingDTO);
 
-    public TeacherDTO createTeacher(TeacherDTO teacherDTO) {
-        Teacher teacher = new Teacher();
+    TeacherDTO updateTeacherById(Long id, TeacherCreatingDTO teacherCreatingDTO);
 
-        teacher.setFirstName(teacherDTO.getFirstName());
-        teacher.setLastName(teacherDTO.getLastName());
-        teacher.setUsername(teacherDTO.getUsername());
-        teacher.setEmail(teacherDTO.getEmail());
-        teacher.setPassword(teacherDTO.getPassword());
-        teacher.setAvatar(teacherDTO.getAvatar());
-        return teacherRepository.save(teacherDTO);
-    }
+    TeacherDTO deleteTeacherById(Long id);
+
+
 }
