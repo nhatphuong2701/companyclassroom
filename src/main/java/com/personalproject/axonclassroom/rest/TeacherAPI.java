@@ -19,4 +19,13 @@ public interface TeacherAPI {
 
     @PutMapping("/{teacherId}")
     ResponseEntity<TeacherDTO> updateTeacherById(@PathVariable("teacherId") Long teacherId, @RequestBody TeacherUpdatingDTO teacherUpdatingDTO);
+
+    @DeleteMapping("/{teacherId}")
+    void deleteTeacherById(@PathVariable("teacherId") Long id);
+
+    @GetMapping("/{teacherId}")
+    ResponseEntity<TeacherDTO> getTeacherById(@PathVariable("teacherId") Long teacherId);
+
+    @GetMapping("/username")
+    ResponseEntity<List<TeacherDTO>> getTeacherByUsername(@RequestParam("username") String username);
 }

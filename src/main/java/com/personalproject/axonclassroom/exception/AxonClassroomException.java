@@ -2,9 +2,9 @@ package com.personalproject.axonclassroom.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class TeacherException {
-    private static final String TEACHER_NOT_FOUND_MSG_KEY = "TeacherNotExist";
-    private static final String TEACHER_MSG = "Teacher Not Found";
+public class AxonClassroomException {
+    private static final String ENTITY_NOT_FOUND_MSG_KEY = "EntityNotExist";
+    private static final String ENTITY_MSG = "Entity Not Found";
 
     public static ResponseException notFound(String messageKey, String message) {
         return new ResponseException(messageKey, message, HttpStatus.NOT_FOUND);
@@ -18,7 +18,7 @@ public class TeacherException {
         return new ResponseException(messageKey, message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static ResponseException teacherNotFound(String messageKey, String message){
-        return notFound(TEACHER_NOT_FOUND_MSG_KEY, TEACHER_MSG);
+    public static ResponseException entityNotFound(){
+        return notFound(ENTITY_NOT_FOUND_MSG_KEY, ENTITY_MSG);
     }
 }

@@ -1,6 +1,4 @@
 package com.personalproject.axonclassroom.service;
-
-import com.personalproject.axonclassroom.entity.Teacher;
 import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherUpdatingDTO;
@@ -16,5 +14,8 @@ public interface TeacherService {
 
     void deleteTeacherById(Long id);
 
+    TeacherDTO getTeacherById(Long id);
+
+    List<TeacherDTO> getTeacherByUserName(String userName);
 
 }
