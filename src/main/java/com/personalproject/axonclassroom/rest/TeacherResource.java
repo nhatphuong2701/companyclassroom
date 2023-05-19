@@ -42,7 +42,7 @@ public class TeacherResource implements TeacherAPI{
     }
 
     @Override
-    public ResponseEntity<List<TeacherDTO>> getTeacherByUsername(String username){
+    public ResponseEntity<TeacherDTO> getTeacherByUsername(String username){
         try{
             return ResponseEntity.ok(teacherService.getTeacherByUserName(username));
         } catch (ResponseException ex) {

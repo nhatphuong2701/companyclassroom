@@ -16,6 +16,6 @@ public interface TeacherService {
 
     TeacherDTO getTeacherById(Long id);
 
-    List<TeacherDTO> getTeacherByUserName(String userName);
+    TeacherDTO getTeacherByUserName(String userName);
 
 }

@@ -27,5 +27,5 @@ public interface TeacherAPI {
     ResponseEntity<TeacherDTO> getTeacherById(@PathVariable("teacherId") Long teacherId);
 
     @GetMapping("/username")
-    ResponseEntity<List<TeacherDTO>> getTeacherByUsername(@RequestParam("username") String username);
+    ResponseEntity<TeacherDTO> getTeacherByUsername(@RequestParam("username") String username);
 }

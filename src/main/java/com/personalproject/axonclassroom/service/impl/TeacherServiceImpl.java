@@ -61,11 +61,12 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<TeacherDTO> getTeacherByUserName(String userName) {
-        List<Teacher> teachers = teacherRepository.findByUsername(userName);
-        if (userName == null || userName.isBlank()) {
+    public TeacherDTO getTeacherByUserName(String userName) {
+        Teacher teacher = teacherRepository.findByUsername(userName)
+                .orElseThrow(() -> AxonClassroomException.badRequest("TEACHER_BAD_REQUEST", "Teacher bad request"));
+        if (userName.isBlank()) {
             throw AxonClassroomException.badRequest("TEACHER_BAD_REQUEST", "Teacher bad request");
         }
-        return TeacherMapper.TEACHER_MAPPER.toDtos(teachers);
+        return TeacherMapper.TEACHER_MAPPER.toDto(teacher);
     }
 }
