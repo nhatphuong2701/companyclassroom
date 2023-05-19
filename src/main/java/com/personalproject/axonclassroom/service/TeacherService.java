@@ -3,6 +3,7 @@ package com.personalproject.axonclassroom.service;
 import com.personalproject.axonclassroom.entity.Teacher;
 import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherDTO;
+import com.personalproject.axonclassroom.service.dto.TeacherUpdatingDTO;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public interface TeacherService {
 
     TeacherDTO createTeacher(TeacherCreatingDTO teacherCreatingDTO);
 
-    TeacherDTO updateTeacherById(Long id, TeacherCreatingDTO teacherCreatingDTO);
+    TeacherDTO updateTeacherById(Long teacherId, TeacherUpdatingDTO teacherUpdatingDTO);
 
-    TeacherDTO deleteTeacherById(Long id);
+    void deleteTeacherById(Long id);
 
 
 }

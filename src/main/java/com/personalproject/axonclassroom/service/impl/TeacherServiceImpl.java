@@ -6,6 +6,7 @@ import com.personalproject.axonclassroom.repository.TeacherRepository;
 import com.personalproject.axonclassroom.service.TeacherService;
 import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherDTO;
+import com.personalproject.axonclassroom.service.dto.TeacherUpdatingDTO;
 import com.personalproject.axonclassroom.service.mapper.TeacherMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,20 +37,21 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDTO updateTeacherById(Long id, TeacherCreatingDTO teacherCreatingDTO) {
-        if(id == null) {
-            throw TeacherException.badRequest("TEACHER_BA_REQUEST", "bad request");
+    public TeacherDTO updateTeacherById(Long id, TeacherUpdatingDTO teacherUpdatingDTO) {
+        Teacher teacher = teacherRepository.findById(id).get();
+        if (id == null) {
+            throw TeacherException.badRequest("TEACHER_BAD_REQUEST", "bad request");
+        } else {
+            Teacher updatedTeacher = teacher;
+            updatedTeacher.setFirstName(teacherUpdatingDTO.getFirstName());
+            updatedTeacher.setLastName(teacherUpdatingDTO.getLastName());
+            updatedTeacher.setEmail(teacherUpdatingDTO.getEmail());
+            return TeacherMapper.TEACHER_MAPPER.toDto(teacherRepository.save(teacher));
         }
-        Teacher teacher = teacherRepository.findById(id);
-        Teacher updatedTeacher = teacher;
-        updatedTeacher.setFirstName(teacherCreatingDTO.getFirstName());
-        updatedTeacher.setLastName(teacherCreatingDTO.getLastName());
-        updatedTeacher.setEmail(teacherCreatingDTO.getEmail());
-        return TeacherMapper.TEACHER_MAPPER.toDto(teacherRepository.save(teacher));
     }
 
     @Override
-    public TeacherDTO deleteTeacherById(Long id) {
-        return null;
+    public void deleteTeacherById(Long id) {
+        teacherRepository.deleteById(id);
     }
 }
