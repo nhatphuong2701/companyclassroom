@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/auth/")
+@RequestMapping("/auth")
 public interface AuthController {
     @PostMapping("/signin")
     ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest);

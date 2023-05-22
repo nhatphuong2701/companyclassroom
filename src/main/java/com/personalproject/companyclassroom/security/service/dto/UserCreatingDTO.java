@@ -14,4 +14,5 @@ public class UserCreatingDTO {
     private String username;
     private String password;
     private String avatar;
+    private Boolean active;
 }
