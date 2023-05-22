@@ -1,6 +1,4 @@
 package com.personalproject.axonclassroom.rest;
-
-import com.personalproject.axonclassroom.entity.Teacher;
 import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherDTO;
 import com.personalproject.axonclassroom.service.dto.TeacherUpdatingDTO;

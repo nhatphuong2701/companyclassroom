@@ -2,7 +2,6 @@ package com.personalproject.axonclassroom.service.impl;
 
 import com.personalproject.axonclassroom.entity.Teacher;
 import com.personalproject.axonclassroom.exception.AxonClassroomException;
-import com.personalproject.axonclassroom.exception.ResponseException;
 import com.personalproject.axonclassroom.repository.TeacherRepository;
 import com.personalproject.axonclassroom.service.TeacherService;
 import com.personalproject.axonclassroom.service.dto.TeacherCreatingDTO;
