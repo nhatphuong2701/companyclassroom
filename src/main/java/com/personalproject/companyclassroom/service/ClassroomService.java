@@ -8,7 +8,7 @@ import java.util.List;
 public interface ClassroomService {
     List<ClassroomDTO> getAllClassrooms();
 
-    ClassroomDTO createClassroom(Long classroomId, ClassroomCreatingDTO classroomCreatingDTO);
+    ClassroomDTO createClassroom(ClassroomCreatingDTO classroomCreatingDTO);
 
     ClassroomDTO updateClassroomById(Long classroomId, ClassroomCreatingDTO classroomCreatingDTO);
 

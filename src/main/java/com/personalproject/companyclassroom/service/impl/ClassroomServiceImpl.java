@@ -45,4 +45,9 @@ public class ClassroomServiceImpl {
         updatedClassroom.setEndDate(classroomUpdatingDTO.getEndDate());
         return ClassroomMapper.CLASSROOM_MAPPER.toDto(classroomRepository.save(updatedClassroom));
     }
+
+    public void deleteClassroomById(Long classroomId) {
+        classroomRepository.findById(classroomId).orElseThrow(CompanyClassroomException::courseNotFound);
+        classroomRepository.deleteById(classroomId);
+    }
 }
