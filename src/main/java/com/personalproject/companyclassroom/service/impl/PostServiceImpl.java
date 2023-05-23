@@ -5,7 +5,6 @@ import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.repository.PostRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
-import com.personalproject.companyclassroom.security.service.mapper.UserMapper;
 import com.personalproject.companyclassroom.service.PostService;
 import com.personalproject.companyclassroom.service.dto.PostCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.PostDTO;

@@ -1,7 +1,6 @@
 package com.personalproject.companyclassroom.rest;
 
 import com.personalproject.companyclassroom.service.CourseService;
-import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
 import lombok.RequiredArgsConstructor;

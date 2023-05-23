@@ -10,6 +10,8 @@ import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.security.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDTO> getAllUsers() {
@@ -30,7 +34,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
                 .lastName(userCreatingDTO.getLastName())
-                .password(userCreatingDTO.getPassword())
+                .password(passwordEncoder.encode(userCreatingDTO.getPassword()))
                 .username(userCreatingDTO.getUsername())
                 .email(userCreatingDTO.getEmail())
                 .avatar(userCreatingDTO.getAvatar())
