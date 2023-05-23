@@ -2,6 +2,8 @@ package com.personalproject.companyclassroom.service;
 
 import com.personalproject.companyclassroom.service.dto.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
+import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,7 +12,8 @@ public interface ClassroomService {
 
     ClassroomDTO createClassroom(ClassroomCreatingDTO classroomCreatingDTO);
 
-    ClassroomDTO updateClassroomById(Long classroomId, ClassroomCreatingDTO classroomCreatingDTO);
 
-    void deleteClassroomByID(Long classroomId);
+    ClassroomDTO updateClassroomById(Long classroomId, ClassroomUpdatingDTO classroomUpdatingDTO);
+
+    void deleteClassroomById(Long classroomId);
 }

@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO updateUserById(Long id, UserCreatingDTO userCreatingDTO) {
-        User user = userRepository.findById(id).orElseThrow(CompanyClassroomException::entityNotFound);
+        User user = userRepository.findById(id).orElseThrow(CompanyClassroomException::userNotFound);
         user.setFirstName(userCreatingDTO.getFirstName());
         user.setLastName(userCreatingDTO.getLastName());
         user.setEmail(userCreatingDTO.getEmail());
@@ -48,13 +48,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        userRepository.findById(id).orElseThrow(CompanyClassroomException::entityNotFound);
+        userRepository.findById(id).orElseThrow(CompanyClassroomException::userNotFound);
         userRepository.deleteById(id);
     }
 
     @Override
     public UserDTO getUserById(Long id) {
-        return UserMapper.USER_MAPPER.toDto(userRepository.findById(id).orElseThrow(CompanyClassroomException::entityNotFound));
+        return UserMapper.USER_MAPPER.toDto(userRepository.findById(id).orElseThrow(CompanyClassroomException::userNotFound));
     }
 
     @Override

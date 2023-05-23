@@ -1,17 +1,20 @@
 package com.personalproject.companyclassroom.rest;
 
 import com.personalproject.companyclassroom.service.CourseService;
+import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class CourseResource implements CourseAPI{
+
     private final CourseService courseService;
     @Override
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
@@ -20,7 +23,8 @@ public class CourseResource implements CourseAPI{
 
     @Override
     public ResponseEntity<CourseDTO> createCourse(CourseCreatingDTO courseCreatingDTO) {
-        return ResponseEntity.ok(courseService.createCourse(courseCreatingDTO));
+        CourseDTO courseDTO = courseService.createCourse(courseCreatingDTO);
+        return ResponseEntity.created(URI.create("/api/courses/" + courseDTO.getId())).body(courseDTO);
     }
 
     @Override
