@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,6 +33,9 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public ClassroomDTO createClassroom(ClassroomCreatingDTO classroomCreatingDTO) {
+        if(classroomCreatingDTO.getStartDate().isBefore(LocalDate.now()) || classroomCreatingDTO.getEndDate().isBefore(classroomCreatingDTO.getStartDate())){
+            throw CompanyClassroomException.badRequest("InvalidClassroomDate","invalid start date or end date");
+        }
         Classroom classroom = Classroom.builder()
                 .name(classroomCreatingDTO.getName())
                 .startDate(classroomCreatingDTO.getStartDate())

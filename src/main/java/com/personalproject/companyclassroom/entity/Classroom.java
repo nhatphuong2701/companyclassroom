@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Table(name = "classrooms")
 public class Classroom {
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -28,7 +28,7 @@ public class Classroom {
     @Column(nullable = false)
     private Long academicYear;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String code;
 
     @ManyToOne

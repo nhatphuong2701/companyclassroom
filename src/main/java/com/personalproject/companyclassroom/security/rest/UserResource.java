@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,10 +21,6 @@ public class UserResource implements UserAPI {
     @Override
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
-    }
-    @Override
-    public ResponseEntity<UserDTO> createUser(UserCreatingDTO userCreatingDTO) {
-        return ResponseEntity.ok(userService.createUser(userCreatingDTO));
     }
 
     @Override

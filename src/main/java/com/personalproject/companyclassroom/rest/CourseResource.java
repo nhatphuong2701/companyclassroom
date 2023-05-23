@@ -23,8 +23,8 @@ public class CourseResource implements CourseAPI{
 
     @Override
     public ResponseEntity<CourseDTO> createCourse(CourseCreatingDTO courseCreatingDTO) {
-        CourseDTO courseDTO = courseService.createCourse(courseCreatingDTO);
-        return ResponseEntity.created(URI.create("/api/courses/" + courseDTO.getId())).body(courseDTO);
+        CourseDTO newCourse = courseService.createCourse(courseCreatingDTO);
+        return ResponseEntity.created(URI.create("/api/courses/" + newCourse.getId())).body(newCourse);
     }
 
     @Override

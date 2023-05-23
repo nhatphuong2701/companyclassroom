@@ -1,8 +1,12 @@
 package com.personalproject.companyclassroom.security.service.dto;
 
+import com.personalproject.companyclassroom.security.entity.Role;
+import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,4 +18,5 @@ public class UserDTO {
     private String email;
     private String username;
     private String avatar;
+    private List<UserRoleAssignment> roles;
 }

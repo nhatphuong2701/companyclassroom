@@ -27,8 +27,8 @@ public class ClassroomResource implements ClassroomAPI{
 
     @Override
     public ResponseEntity<ClassroomDTO> createClassroom(ClassroomCreatingDTO classroomCreatingDTO) {
-        ClassroomDTO classroomDTO = classroomService.createClassroom(classroomCreatingDTO);
-        return ResponseEntity.created(URI.create("/api/classrooms/" + classroomDTO.getId())).body(classroomDTO);
+        ClassroomDTO newClassroom = classroomService.createClassroom(classroomCreatingDTO);
+        return ResponseEntity.created(URI.create("/api/classrooms/" + newClassroom.getId())).body(newClassroom);
     }
 
     @Override

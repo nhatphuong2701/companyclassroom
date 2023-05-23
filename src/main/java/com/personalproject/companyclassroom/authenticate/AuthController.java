@@ -1,6 +1,8 @@
 package com.personalproject.companyclassroom.authenticate;
 
 import com.personalproject.companyclassroom.security.jwt.JwtRequest;
+import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,4 +16,7 @@ import javax.validation.Valid;
 public interface AuthController {
     @PostMapping("/signin")
     ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest);
+
+    @PostMapping("/signup")
+    ResponseEntity<UserDTO> signUp(@RequestBody UserCreatingDTO userCreatingDTO);
 }

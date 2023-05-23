@@ -15,9 +15,6 @@ public interface UserAPI {
     @GetMapping
     ResponseEntity<List<UserDTO>> getAllUsers();
 
-    @PostMapping
-    ResponseEntity<UserDTO> createUser(@RequestBody UserCreatingDTO userCreatingDTO);
-
     @PutMapping("/{userId}")
     ResponseEntity<UserDTO> updateUserById(@PathVariable("teacherId") Long teacherId, @RequestBody UserCreatingDTO userCreatingDTO);
 

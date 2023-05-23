@@ -1,9 +1,14 @@
 package com.personalproject.companyclassroom.authenticate.impl;
 
 import com.personalproject.companyclassroom.authenticate.AuthController;
+import com.personalproject.companyclassroom.exception.CompanyClassroomException;
+import com.personalproject.companyclassroom.exception.ResponseException;
 import com.personalproject.companyclassroom.security.jwt.JwtRequest;
 import com.personalproject.companyclassroom.security.jwt.JwtResponse;
 import com.personalproject.companyclassroom.security.jwt.JwtUtils;
+import com.personalproject.companyclassroom.security.service.UserService;
+import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.security.service.impl.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +27,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
+
+    private final UserService userService;
+
     private final AuthenticationManager authenticationManager;
 
     private final JwtUtils jwtUtils;
@@ -41,6 +50,15 @@ public class AuthControllerImpl implements AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getUsername(),
                 roles));
+    }
+
+    public  ResponseEntity<UserDTO> signUp(UserCreatingDTO userCreatingDTO){
+        try {
+            UserDTO newUser = userService.signUp(userCreatingDTO);
+            return ResponseEntity.created(URI.create("/auth/signup/" + newUser.getId())).body(newUser);
+        } catch (ResponseException ex) {
+            throw CompanyClassroomException.badRequest("UnauthorizedRole", "Unauthorized role");
+        }
     }
 
 }

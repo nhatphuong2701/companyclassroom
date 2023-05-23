@@ -1,7 +1,9 @@
 package com.personalproject.companyclassroom.security.service.impl;
 
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.User;
+import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.security.service.UserService;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
@@ -10,6 +12,7 @@ import com.personalproject.companyclassroom.security.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO createUser(UserCreatingDTO userCreatingDTO) {
+    public UserDTO signUp(UserCreatingDTO userCreatingDTO) {
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
                 .lastName(userCreatingDTO.getLastName())
@@ -32,6 +35,18 @@ public class UserServiceImpl implements UserService {
                 .email(userCreatingDTO.getEmail())
                 .avatar(userCreatingDTO.getAvatar())
                 .build();
+        List<UserRoleAssignment> tempList = new ArrayList<>();
+        UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
+        userRoleAssignment.setUsers(user);
+        if (userCreatingDTO.getRoles().contains(Role.ROLE_STUDENT)) {
+            userRoleAssignment.setRole(Role.ROLE_STUDENT);
+        } else if (userCreatingDTO.getRoles().contains(Role.ROLE_TEACHER)) {
+            userRoleAssignment.setRole(Role.ROLE_STUDENT);
+        } else if (userCreatingDTO.getRoles().contains(Role.ROLE_ADMIN)) {
+            throw CompanyClassroomException.badRequest("UnauthorizedRole", "Unauthorized role");
+        }
+        tempList.add(userRoleAssignment);
+        user.setRoles(tempList);
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 
