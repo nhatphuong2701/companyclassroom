@@ -28,8 +28,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDTO createComment(CommentCreatingDTO commentCreatingDTO) {
         Comment newComment = Comment.builder()
-                .user(userRepository.findById(commentCreatingDTO.getUserId()).orElseThrow(CompanyClassroomException::userNotFound))
-                .post(postRepository.findById(commentCreatingDTO.getPostId()).orElseThrow(CompanyClassroomException::postNotFound))
+                .user(userRepository.findById(commentCreatingDTO.getUserId()).
+                        orElseThrow(CompanyClassroomException::userNotFound))
+                .post(postRepository.findById(commentCreatingDTO.getPostId()).
+                        orElseThrow(CompanyClassroomException::postNotFound))
                 .content(commentCreatingDTO.getContent())
                 .attachment(commentCreatingDTO.getAttachment())
                 .build();

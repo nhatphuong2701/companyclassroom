@@ -30,17 +30,22 @@ public class ParticipateServiceImpl implements ParticipateService {
     @Override
     public ParticipateDTO createParticipation(ParticipateCreatingDTO participateCreatingDTO) {
         Participate newParticipate = Participate.builder()
-                .user(userRepository.findById(participateCreatingDTO.getUserId()).orElseThrow(CompanyClassroomException::userNotFound))
-                .classroom(classroomRepository.findById(participateCreatingDTO.getClassroomId()).orElseThrow(CompanyClassroomException::classroomNotFound))
+                .user(userRepository.findById(participateCreatingDTO.getUserId()).
+                        orElseThrow(CompanyClassroomException::userNotFound))
+                .classroom(classroomRepository.findById(participateCreatingDTO.getClassroomId()).
+                        orElseThrow(CompanyClassroomException::classroomNotFound))
                 .build();
         return ParticipateMapper.PARTICIPATE_MAPPER.toDto(participateRepository.save(newParticipate));
     }
 
     @Override
     public ParticipateDTO updateParticipationById(Long participateId, ParticipateCreatingDTO participateCreatingDTO) {
-        Participate updateParticipate = new Participate();
-        updateParticipate.setUser(userRepository.findById(participateCreatingDTO.getUserId()).orElseThrow(CompanyClassroomException::userNotFound));
-        updateParticipate.setClassroom(classroomRepository.findById(participateCreatingDTO.getClassroomId()).orElseThrow(CompanyClassroomException::classroomNotFound));
+        Participate updateParticipate = participateRepository.findById(participateId).
+                orElseThrow(CompanyClassroomException::participationNotFound);
+        updateParticipate.setUser(userRepository.findById(participateCreatingDTO.getUserId()).
+                orElseThrow(CompanyClassroomException::userNotFound));
+        updateParticipate.setClassroom(classroomRepository.findById(participateCreatingDTO.getClassroomId()).
+                orElseThrow(CompanyClassroomException::classroomNotFound));
         return ParticipateMapper.PARTICIPATE_MAPPER.toDto(participateRepository.save(updateParticipate));
     }
 

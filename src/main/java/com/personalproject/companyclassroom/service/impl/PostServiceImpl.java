@@ -33,8 +33,10 @@ public class PostServiceImpl implements PostService {
                 .title(postCreatingDTO.getTitle())
                 .content(postCreatingDTO.getContent())
                 .attachment(postCreatingDTO.getAttachment())
-                .user(userRepository.findById(postCreatingDTO.getUserId()).orElseThrow(CompanyClassroomException::userNotFound))
-                .classroom(classroomRepository.findById(postCreatingDTO.getClassroomId()).orElseThrow(CompanyClassroomException::classroomNotFound))
+                .user(userRepository.findById(postCreatingDTO.getUserId()).
+                        orElseThrow(CompanyClassroomException::userNotFound))
+                .classroom(classroomRepository.findById(postCreatingDTO.getClassroomId()).
+                        orElseThrow(CompanyClassroomException::classroomNotFound))
                 .build();
         return PostMapper.POST_MAPPER.toDto(postRepository.save(post));
     }

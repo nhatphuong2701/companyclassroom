@@ -33,8 +33,10 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public ClassroomDTO createClassroom(ClassroomCreatingDTO classroomCreatingDTO) {
-        if (classroomCreatingDTO.getStartDate().isBefore(LocalDate.now()) || classroomCreatingDTO.getEndDate().isBefore(classroomCreatingDTO.getStartDate())) {
-            throw CompanyClassroomException.badRequest("InvalidClassroomDate", "invalid start date or end date");
+        if (classroomCreatingDTO.getStartDate().isBefore(LocalDate.now()) ||
+                classroomCreatingDTO.getEndDate().isBefore(classroomCreatingDTO.getStartDate())) {
+            throw CompanyClassroomException.badRequest("InvalidClassroomDate",
+                    "invalid start date or end date");
         }
         Classroom classroom = Classroom.builder()
                 .name(classroomCreatingDTO.getName())
@@ -42,16 +44,19 @@ public class ClassroomServiceImpl implements ClassroomService {
                 .endDate(classroomCreatingDTO.getEndDate())
                 .code(classroomCreatingDTO.getCode())
                 .academicYear(classroomCreatingDTO.getAcademicYear())
-                .course(courseRepository.findById(classroomCreatingDTO.getCourseId()).orElseThrow(CompanyClassroomException::courseNotFound))
+                .course(courseRepository.findById(classroomCreatingDTO.getCourseId()).
+                        orElseThrow(CompanyClassroomException::courseNotFound))
                 .build();
         return ClassroomMapper.CLASSROOM_MAPPER.toDto(classroomRepository.save(classroom));
     }
 
     @Override
     public ClassroomDTO updateClassroomById(Long classroomId, ClassroomUpdatingDTO classroomUpdatingDTO) {
-        Classroom updatedClassroom = classroomRepository.findById(classroomId).orElseThrow(CompanyClassroomException::classroomNotFound);
+        Classroom updatedClassroom = classroomRepository.findById(classroomId).
+        orElseThrow(CompanyClassroomException::classroomNotFound);
         updatedClassroom.setName(classroomUpdatingDTO.getName());
-        updatedClassroom.setCourse(courseRepository.findById(classroomUpdatingDTO.getCourseId()).orElseThrow(CompanyClassroomException::courseNotFound));
+        updatedClassroom.setCourse(courseRepository.findById(classroomUpdatingDTO.getCourseId()).
+                orElseThrow(CompanyClassroomException::courseNotFound));
         updatedClassroom.setAcademicYear(classroomUpdatingDTO.getAcademicYear());
         updatedClassroom.setStartDate(classroomUpdatingDTO.getStartDate());
         updatedClassroom.setEndDate(classroomUpdatingDTO.getEndDate());

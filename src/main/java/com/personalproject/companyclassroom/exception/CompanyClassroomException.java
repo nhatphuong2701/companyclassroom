@@ -17,6 +17,8 @@ public class CompanyClassroomException {
     private static final String ASSIGNMENT_MSG = "Assignment Not Found";
     private static final String SUBMISSION_NOT_FOUND_MSG_KEY = "SubmissionNotExist";
     private static final String SUBMISSION_MSG = "Submission Not Found";
+    private static final String PARTICIPATION_NOT_FOUND_MSG_KEY = "ParticipationNotExist";
+    private static final String PARTICIPATION_MSG = "Participation Not Found";
     public static ResponseException notFound(String messageKey, String message) {
         return new ResponseException(messageKey, message, HttpStatus.NOT_FOUND);
     }
@@ -56,4 +58,9 @@ public class CompanyClassroomException {
     public static ResponseException submissionNotFound(){
         return notFound(SUBMISSION_NOT_FOUND_MSG_KEY, SUBMISSION_MSG);
     }
+
+    public static ResponseException participationNotFound(){
+        return notFound(PARTICIPATION_NOT_FOUND_MSG_KEY, PARTICIPATION_MSG);
+    }
+
 }

@@ -28,7 +28,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO createCourse(CourseCreatingDTO courseCreatingDTO) {
         if(courseCreatingDTO.getName().isBlank() || courseCreatingDTO.getName() == null){
-            throw CompanyClassroomException.badRequest("InvalidCourseName", "Course name must be filled");
+            throw CompanyClassroomException.badRequest("InvalidCourseName",
+                    "Course name must be filled");
         }
         Course course = Course.builder()
                 .name(courseCreatingDTO.getName())
@@ -39,7 +40,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseDTO updateCourse(Long courseId, CourseCreatingDTO courseCreatingDTO) {
-        Course updatedCourse = courseRepository.findById(courseId).orElseThrow(CompanyClassroomException::courseNotFound);
+        Course updatedCourse = courseRepository.findById(courseId).
+                orElseThrow(CompanyClassroomException::courseNotFound);
         updatedCourse.setName(courseCreatingDTO.getName());
         updatedCourse.setDescription(courseCreatingDTO.getDescription());
         return CourseMapper.COURSE_MAPPER.toDto(courseRepository.save(updatedCourse));
