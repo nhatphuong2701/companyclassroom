@@ -1,4 +1,4 @@
-package com.personalproject.companyclassroom.service.dto;
+package com.personalproject.companyclassroom.service.dto.creatingDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +14,5 @@ public class ClassroomCreatingDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private Long academicYear;
-    private String code;
     private Long courseId;
 }

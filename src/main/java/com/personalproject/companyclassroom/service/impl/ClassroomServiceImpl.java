@@ -5,19 +5,18 @@ import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.repository.CourseRepository;
 import com.personalproject.companyclassroom.service.ClassroomService;
-import com.personalproject.companyclassroom.service.dto.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.mapper.ClassroomMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @Service
-@RequiredArgsConstructor
 public class ClassroomServiceImpl implements ClassroomService {
 
     @Autowired
@@ -38,14 +37,15 @@ public class ClassroomServiceImpl implements ClassroomService {
             throw CompanyClassroomException.badRequest("InvalidClassroomDate",
                     "invalid start date or end date");
         }
+        Random random = new Random();
         Classroom classroom = Classroom.builder()
                 .name(classroomCreatingDTO.getName())
                 .startDate(classroomCreatingDTO.getStartDate())
                 .endDate(classroomCreatingDTO.getEndDate())
-                .code(classroomCreatingDTO.getCode())
                 .academicYear(classroomCreatingDTO.getAcademicYear())
                 .course(courseRepository.findById(classroomCreatingDTO.getCourseId()).
                         orElseThrow(CompanyClassroomException::courseNotFound))
+                .entryCode(random.nextLong())
                 .build();
         return ClassroomMapper.CLASSROOM_MAPPER.toDto(classroomRepository.save(classroom));
     }
@@ -53,7 +53,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDTO updateClassroomById(Long classroomId, ClassroomUpdatingDTO classroomUpdatingDTO) {
         Classroom updatedClassroom = classroomRepository.findById(classroomId).
-        orElseThrow(CompanyClassroomException::classroomNotFound);
+                orElseThrow(CompanyClassroomException::classroomNotFound);
         updatedClassroom.setName(classroomUpdatingDTO.getName());
         updatedClassroom.setCourse(courseRepository.findById(classroomUpdatingDTO.getCourseId()).
                 orElseThrow(CompanyClassroomException::courseNotFound));

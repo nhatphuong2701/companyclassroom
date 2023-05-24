@@ -1,6 +1,6 @@
 package com.personalproject.companyclassroom.service;
 
-import com.personalproject.companyclassroom.service.dto.ClassroomCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
 

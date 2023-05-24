@@ -1,4 +1,4 @@
-package com.personalproject.companyclassroom.service.dto;
+package com.personalproject.companyclassroom.service.dto.creatingDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

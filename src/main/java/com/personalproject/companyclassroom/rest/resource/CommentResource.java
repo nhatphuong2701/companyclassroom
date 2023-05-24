@@ -1,7 +1,8 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
+import com.personalproject.companyclassroom.rest.api.CommentAPI;
 import com.personalproject.companyclassroom.service.CommentService;
-import com.personalproject.companyclassroom.service.dto.CommentCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CommentResource implements CommentAPI{
+public class CommentResource implements CommentAPI {
 
     private final CommentService commentService;
 

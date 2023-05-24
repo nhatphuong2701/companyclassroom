@@ -6,7 +6,7 @@ import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.repository.PostRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.service.PostService;
-import com.personalproject.companyclassroom.service.dto.PostCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.PostCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.PostDTO;
 import com.personalproject.companyclassroom.service.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;

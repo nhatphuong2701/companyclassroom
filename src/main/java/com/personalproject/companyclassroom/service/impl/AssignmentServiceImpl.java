@@ -5,7 +5,7 @@ import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.AssignmentRepository;
 import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.service.AssignmentService;
-import com.personalproject.companyclassroom.service.dto.AssignmentCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
 import com.personalproject.companyclassroom.service.mapper.AssignmentMapper;
 import lombok.RequiredArgsConstructor;

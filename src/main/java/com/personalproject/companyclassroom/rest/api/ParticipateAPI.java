@@ -1,6 +1,6 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.api;
 
-import com.personalproject.companyclassroom.service.dto.ParticipateCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

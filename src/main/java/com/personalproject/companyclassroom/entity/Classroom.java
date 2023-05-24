@@ -28,8 +28,7 @@ public class Classroom {
     @Column(nullable = false)
     private Long academicYear;
 
-    @Column(unique = true, nullable = false)
-    private String code;
+    private Long entryCode;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)

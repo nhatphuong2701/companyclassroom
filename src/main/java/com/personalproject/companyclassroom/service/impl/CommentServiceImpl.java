@@ -6,7 +6,7 @@ import com.personalproject.companyclassroom.repository.CommentRepository;
 import com.personalproject.companyclassroom.repository.PostRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.service.CommentService;
-import com.personalproject.companyclassroom.service.dto.CommentCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 import com.personalproject.companyclassroom.service.mapper.CommentMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,8 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
+import com.personalproject.companyclassroom.rest.api.PostAPI;
 import com.personalproject.companyclassroom.service.PostService;
-import com.personalproject.companyclassroom.service.dto.PostCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.PostCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.PostDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class PostResource implements PostAPI{
+public class PostResource implements PostAPI {
 
     private final PostService postService;
 

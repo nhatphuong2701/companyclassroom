@@ -1,6 +1,6 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.api;
 
-import com.personalproject.companyclassroom.service.dto.ClassroomCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
 import org.springframework.http.ResponseEntity;

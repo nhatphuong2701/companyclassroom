@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class UserRoleAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private Role role;

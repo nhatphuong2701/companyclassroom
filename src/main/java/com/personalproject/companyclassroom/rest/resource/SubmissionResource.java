@@ -1,7 +1,8 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
+import com.personalproject.companyclassroom.rest.api.SubmissionAPI;
 import com.personalproject.companyclassroom.service.SubmissionService;
-import com.personalproject.companyclassroom.service.dto.SubmissionCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.SubmissionCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.SubmissionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class SubmissionResource implements SubmissionAPI{
+public class SubmissionResource implements SubmissionAPI {
 
     private final SubmissionService submissionService;
     @Override

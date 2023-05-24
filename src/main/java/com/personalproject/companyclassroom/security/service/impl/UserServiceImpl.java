@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO signUp(UserCreatingDTO userCreatingDTO) {
+    public UserDTO createUser(UserCreatingDTO userCreatingDTO) {
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
                 .lastName(userCreatingDTO.getLastName())
@@ -41,18 +41,17 @@ public class UserServiceImpl implements UserService {
                 .dateOfBirth(userCreatingDTO.getDateOfBirth())
                 .avatar(userCreatingDTO.getAvatar())
                 .build();
-        List<UserRoleAssignment> tempList = new ArrayList<>();
-        UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
-        userRoleAssignment.setUsers(user);
-        if (userCreatingDTO.getRoles().contains(Role.ROLE_STUDENT)) {
-            userRoleAssignment.setRole(Role.ROLE_STUDENT);
-        } else if (userCreatingDTO.getRoles().contains(Role.ROLE_TEACHER)) {
-            userRoleAssignment.setRole(Role.ROLE_STUDENT);
-        } else if (userCreatingDTO.getRoles().contains(Role.ROLE_ADMIN)) {
-            throw CompanyClassroomException.badRequest("UnauthorizedRole", "Unauthorized role");
-        }
-        tempList.add(userRoleAssignment);
-        user.setRoles(tempList);
+        List<UserRoleAssignment> userRoleAssignments = new ArrayList<>();
+        List<Role> assignedRoles = userCreatingDTO.getRoles();
+        assignedRoles.forEach(assignedRole -> {
+            UserRoleAssignment userRoleAssignment = UserRoleAssignment.builder()
+                    .role(assignedRole)
+                    .users(user)
+                    .build();
+            userRoleAssignments.add(userRoleAssignment);
+        });
+
+        user.setRoles(userRoleAssignments);
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 

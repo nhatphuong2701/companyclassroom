@@ -1,7 +1,8 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
+import com.personalproject.companyclassroom.rest.api.CourseAPI;
 import com.personalproject.companyclassroom.service.CourseService;
-import com.personalproject.companyclassroom.service.dto.CourseCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CourseResource implements CourseAPI{
+public class CourseResource implements CourseAPI {
 
     private final CourseService courseService;
     @Override

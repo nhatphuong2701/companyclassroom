@@ -28,7 +28,9 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
     private LocalDate dateOfBirth;
     private String email;
 

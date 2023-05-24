@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.entity.Course;
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.CourseRepository;
 import com.personalproject.companyclassroom.service.CourseService;
-import com.personalproject.companyclassroom.service.dto.CourseCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
 import com.personalproject.companyclassroom.service.mapper.CourseMapper;
 import lombok.RequiredArgsConstructor;

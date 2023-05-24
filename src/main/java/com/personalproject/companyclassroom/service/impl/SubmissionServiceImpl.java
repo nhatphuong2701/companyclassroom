@@ -6,7 +6,7 @@ import com.personalproject.companyclassroom.repository.AssignmentRepository;
 import com.personalproject.companyclassroom.repository.SubmissionRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.service.SubmissionService;
-import com.personalproject.companyclassroom.service.dto.SubmissionCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.SubmissionCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.SubmissionDTO;
 import com.personalproject.companyclassroom.service.mapper.SubmissionMapper;
 import lombok.RequiredArgsConstructor;

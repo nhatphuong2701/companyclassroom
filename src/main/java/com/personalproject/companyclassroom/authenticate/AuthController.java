@@ -16,7 +16,4 @@ import javax.validation.Valid;
 public interface AuthController {
     @PostMapping("/signin")
     ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest);
-
-    @PostMapping("/signup")
-    ResponseEntity<UserDTO> signUp(@RequestBody UserCreatingDTO userCreatingDTO);
 }

@@ -3,6 +3,7 @@ package com.personalproject.companyclassroom.security.rest;
 
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.exception.ResponseException;
+import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.service.UserService;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
@@ -21,6 +22,12 @@ public class UserResource implements UserAPI {
     @Override
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @Override
+    public ResponseEntity<UserDTO> createUser(UserCreatingDTO userCreatingDTO) {
+        UserDTO newUser = userService.createUser(userCreatingDTO);
+        return ResponseEntity.created(URI.create("/api/users/" + newUser.getId())).body(newUser);
     }
 
     @Override

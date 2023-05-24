@@ -1,6 +1,6 @@
 package com.personalproject.companyclassroom.service;
 
-import com.personalproject.companyclassroom.service.dto.CourseCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
 
 import java.util.List;

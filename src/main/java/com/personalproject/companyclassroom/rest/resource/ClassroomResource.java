@@ -1,8 +1,9 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
 
+import com.personalproject.companyclassroom.rest.api.ClassroomAPI;
 import com.personalproject.companyclassroom.service.ClassroomService;
-import com.personalproject.companyclassroom.service.dto.ClassroomCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 
-public class ClassroomResource implements ClassroomAPI{
+public class ClassroomResource implements ClassroomAPI {
 
     private final ClassroomService classroomService;
 

@@ -1,6 +1,6 @@
 package com.personalproject.companyclassroom.service;
 
-import com.personalproject.companyclassroom.service.dto.CommentCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 
 import java.util.List;

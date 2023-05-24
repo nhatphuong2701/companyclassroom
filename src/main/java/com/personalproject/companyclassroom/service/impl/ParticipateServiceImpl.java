@@ -6,7 +6,7 @@ import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.repository.ParticipateRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.service.ParticipateService;
-import com.personalproject.companyclassroom.service.dto.ParticipateCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
 import com.personalproject.companyclassroom.service.mapper.ParticipateMapper;
 import lombok.RequiredArgsConstructor;

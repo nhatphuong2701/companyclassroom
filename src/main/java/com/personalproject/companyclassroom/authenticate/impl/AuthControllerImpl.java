@@ -51,14 +51,4 @@ public class AuthControllerImpl implements AuthController {
                 userDetails.getUsername(),
                 roles));
     }
-
-    public  ResponseEntity<UserDTO> signUp(UserCreatingDTO userCreatingDTO){
-        try {
-            UserDTO newUser = userService.signUp(userCreatingDTO);
-            return ResponseEntity.created(URI.create("/auth/signup/" + newUser.getId())).body(newUser);
-        } catch (ResponseException ex) {
-            throw CompanyClassroomException.badRequest("UnauthorizedRole", "Unauthorized role");
-        }
-    }
-
 }

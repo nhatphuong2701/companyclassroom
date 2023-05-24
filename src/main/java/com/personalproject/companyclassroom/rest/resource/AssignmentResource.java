@@ -1,7 +1,8 @@
-package com.personalproject.companyclassroom.rest;
+package com.personalproject.companyclassroom.rest.resource;
 
+import com.personalproject.companyclassroom.rest.api.AssignmentAPI;
 import com.personalproject.companyclassroom.service.AssignmentService;
-import com.personalproject.companyclassroom.service.dto.AssignmentCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class AssignmentResource implements AssignmentAPI{
+public class AssignmentResource implements AssignmentAPI {
 
     private final AssignmentService assignmentService;
 
