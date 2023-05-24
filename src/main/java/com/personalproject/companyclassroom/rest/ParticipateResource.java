@@ -29,7 +29,7 @@ public class ParticipateResource implements ParticipateAPI{
 
     @Override
     public ResponseEntity<ParticipateDTO> updateParticipationById(Long participateId, ParticipateCreatingDTO participateCreatingDTO) {
-        return ResponseEntity.ok().body(participateService.updateParticipationById(participateId, participateCreatingDTO);
+        return ResponseEntity.ok().body(participateService.updateParticipationById(participateId, participateCreatingDTO));
     }
 
     @Override

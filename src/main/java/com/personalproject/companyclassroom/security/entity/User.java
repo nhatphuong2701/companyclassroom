@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    private Gender gender;
+    private LocalDate dateOfBirth;
     private String email;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)

@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(userCreatingDTO.getPassword()))
                 .username(userCreatingDTO.getUsername())
                 .email(userCreatingDTO.getEmail())
+                .gender(userCreatingDTO.getGender())
+                .dateOfBirth(userCreatingDTO.getDateOfBirth())
                 .avatar(userCreatingDTO.getAvatar())
                 .build();
         List<UserRoleAssignment> tempList = new ArrayList<>();
@@ -60,6 +62,8 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userCreatingDTO.getFirstName());
         user.setLastName(userCreatingDTO.getLastName());
         user.setEmail(userCreatingDTO.getEmail());
+        user.setGender(userCreatingDTO.getGender());
+        user.setDateOfBirth(userCreatingDTO.getDateOfBirth());
         user.setUsername(userCreatingDTO.getUsername());
         user.setPassword(userCreatingDTO.getPassword());
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));

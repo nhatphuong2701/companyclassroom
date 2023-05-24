@@ -16,7 +16,7 @@ public interface ParticipateAPI {
     @PostMapping
     ResponseEntity<ParticipateDTO> createParticipation(@RequestBody ParticipateCreatingDTO participateCreatingDTO);
 
-    @PutMapping("/{participateId")
+    @PutMapping("/{participateId}")
     ResponseEntity<ParticipateDTO> updateParticipationById(@PathVariable("participateId") Long participateId,
                                                            @RequestBody ParticipateCreatingDTO participateCreatingDTO);
 
