@@ -1,2 +1,7 @@
-package com.personalproject.companyclassroom.repository;public interface CommentRepository {
+package com.personalproject.companyclassroom.repository;
+
+import com.personalproject.companyclassroom.entity.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CommentRepository extends JpaRepository<Comment,Long> {
 }

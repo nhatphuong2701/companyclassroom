@@ -33,8 +33,8 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public ClassroomDTO createClassroom(ClassroomCreatingDTO classroomCreatingDTO) {
-        if(classroomCreatingDTO.getStartDate().isBefore(LocalDate.now()) || classroomCreatingDTO.getEndDate().isBefore(classroomCreatingDTO.getStartDate())){
-            throw CompanyClassroomException.badRequest("InvalidClassroomDate","invalid start date or end date");
+        if (classroomCreatingDTO.getStartDate().isBefore(LocalDate.now()) || classroomCreatingDTO.getEndDate().isBefore(classroomCreatingDTO.getStartDate())) {
+            throw CompanyClassroomException.badRequest("InvalidClassroomDate", "invalid start date or end date");
         }
         Classroom classroom = Classroom.builder()
                 .name(classroomCreatingDTO.getName())
