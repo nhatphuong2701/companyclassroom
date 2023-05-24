@@ -25,7 +25,7 @@ public class CommentResource implements CommentAPI{
     @Override
     public ResponseEntity<CommentDTO> createComment(CommentCreatingDTO commentCreatingDTO) {
         CommentDTO newComment = commentService.createComment(commentCreatingDTO);
-        return ResponseEntity.created(URI.create("/api/courses/" + newComment.getId())).body(newComment);
+        return ResponseEntity.created(URI.create("/api/comments/" + newComment.getId())).body(newComment);
     }
 
     @Override

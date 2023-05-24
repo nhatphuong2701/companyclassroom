@@ -2,6 +2,7 @@ package com.personalproject.companyclassroom.entity;
 
 import com.personalproject.companyclassroom.security.entity.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Participate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
