@@ -15,6 +15,5 @@ public class ClassroomDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private Long academicYear;
-    private Long entryCode;
     private Course course;
 }

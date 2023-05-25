@@ -27,7 +27,7 @@ public class UserRoleAssignment {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User users;
+    private User user;
 
     @CreationTimestamp
     @Column(name = "assigned_date")
@@ -36,4 +36,5 @@ public class UserRoleAssignment {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private LocalDateTime updatedDate;
+
 }

@@ -3,17 +3,16 @@ package com.personalproject.companyclassroom.security.service.impl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.User;
-import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Data
@@ -28,13 +27,10 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(User user) {
-        List<Role> roles = user.getRoles()
-                .stream()
-                .map(UserRoleAssignment::getRole)
-                .collect(Collectors.toList());
-        List<GrantedAuthority> authorities = roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.name()))
-                .collect(Collectors.toList());
+        Role role = user.getUserRoleAssignment().getRole();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        GrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        authorities.add(authority);
 
         return new UserDetailsImpl(
                 user.getId(),

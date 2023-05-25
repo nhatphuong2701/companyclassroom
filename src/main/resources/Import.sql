@@ -25,3 +25,9 @@ insert into user_role_assignment (role,user_id) values ('ROLE_STUDENT',3);
 
 insert into courses (description, name) values ('for Non-it students', 'NON-IT');
 insert into courses (description, name) values ('for freshers', 'fresher course');
+
+insert into classrooms (name, academic_year, start_date, end_date, course_id) values ('non-it 1', 2023, '2023-03-13', '2023-09-13', 1);
+insert into classrooms (name, academic_year, start_date, end_date, course_id) values ('non-it 2', 2023, '2023-04-13', '2023-10-13', 1);
+
+insert into participate (classroom_id, user_id) values (1, 1);
+insert into participate (classroom_id, user_id) values (1, 2);

@@ -35,8 +35,8 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "users", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private List<UserRoleAssignment> roles;
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
+    private UserRoleAssignment userRoleAssignment;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -48,4 +48,8 @@ public class User {
     private String avatar;
 
     private Boolean active;
+
+    public void setUserRoleAssignment(UserRoleAssignment userRoleAssignment) {
+        this.userRoleAssignment = userRoleAssignment;
+    }
 }

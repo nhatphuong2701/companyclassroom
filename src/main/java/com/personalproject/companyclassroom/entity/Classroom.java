@@ -14,6 +14,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Table(name = "classrooms")
+@NamedQuery(name = "Classroom.findActiveClassesAndNumberOfStudents",
+        query = "SELECT new com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO" +
+                "(c, (SELECT COUNT(r.user) " +
+                "FROM UserRoleAssignment r " +
+                "WHERE r.role LIKE ?1)) " +
+        "FROM Classroom c, Participate p , User u " +
+        "WHERE c.id = p.classroom.id AND p.user.id = u.id and c.endDate > ?2 " +
+        "GROUP BY c.id ")
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +35,6 @@ public class Classroom {
 
     @Column(nullable = false)
     private Long academicYear;
-
-    private Long entryCode;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)

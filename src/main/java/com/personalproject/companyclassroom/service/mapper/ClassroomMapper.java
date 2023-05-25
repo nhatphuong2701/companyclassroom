@@ -2,6 +2,7 @@ package com.personalproject.companyclassroom.service.mapper;
 
 import com.personalproject.companyclassroom.entity.Classroom;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -15,4 +16,5 @@ public interface ClassroomMapper {
     ClassroomDTO toDto (Classroom classroom);
 
     List<ClassroomDTO> toDtos (List<Classroom> classrooms);
+
 }

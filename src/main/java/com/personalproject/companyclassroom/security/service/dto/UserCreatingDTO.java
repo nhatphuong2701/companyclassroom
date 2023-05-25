@@ -18,7 +18,7 @@ public class UserCreatingDTO {
     private String email;
     private Gender gender;
     private LocalDate dateOfBirth;
-    private List<Role> roles;
+    private Role role;
     private String username;
     private String password;
     private String avatar;

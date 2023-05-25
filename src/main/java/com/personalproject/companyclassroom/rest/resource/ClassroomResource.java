@@ -2,15 +2,18 @@ package com.personalproject.companyclassroom.rest.resource;
 
 
 import com.personalproject.companyclassroom.rest.api.ClassroomAPI;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.service.ClassroomService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,5 +41,10 @@ public class ClassroomResource implements ClassroomAPI {
     public void deleteClassroomById(Long classroomId) {
         classroomService.deleteClassroomById(classroomId);
         ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<CustomClassroomDTO>> findActiveClassesAndNumberOfStudents(Role role, LocalDate date) {
+        return ResponseEntity.ok(classroomService.findActiveClassesAndNumberOfStudents(role, date));
     }
 }

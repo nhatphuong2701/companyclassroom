@@ -4,10 +4,12 @@ import com.personalproject.companyclassroom.entity.Classroom;
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.ClassroomRepository;
 import com.personalproject.companyclassroom.repository.CourseRepository;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.service.ClassroomService;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO;
 import com.personalproject.companyclassroom.service.mapper.ClassroomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,6 @@ public class ClassroomServiceImpl implements ClassroomService {
                 .academicYear(classroomCreatingDTO.getAcademicYear())
                 .course(courseRepository.findById(classroomCreatingDTO.getCourseId()).
                         orElseThrow(CompanyClassroomException::courseNotFound))
-                .entryCode(random.nextLong())
                 .build();
         return ClassroomMapper.CLASSROOM_MAPPER.toDto(classroomRepository.save(classroom));
     }
@@ -74,5 +75,10 @@ public class ClassroomServiceImpl implements ClassroomService {
     public void deleteClassroomById(Long classroomId) {
         classroomRepository.findById(classroomId).orElseThrow(CompanyClassroomException::courseNotFound);
         classroomRepository.deleteById(classroomId);
+    }
+
+    @Override
+    public List<CustomClassroomDTO> findActiveClassesAndNumberOfStudents(Role role, LocalDate date) {
+        return classroomRepository.findActiveClassesAndNumberOfStudents(role, date);
     }
 }

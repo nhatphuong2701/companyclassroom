@@ -58,18 +58,11 @@ public class UserServiceImpl implements UserService {
                 .dateOfBirth(userCreatingDTO.getDateOfBirth())
                 .avatar(userCreatingDTO.getAvatar())
                 .build();
-
-        List<UserRoleAssignment> userRoleAssignments = new ArrayList<>();
-        List<Role> assignedRoles = userCreatingDTO.getRoles();
-        assignedRoles.forEach(assignedRole -> {
-            UserRoleAssignment userRoleAssignment = UserRoleAssignment.builder()
-                    .role(assignedRole)
-                    .users(user)
-                    .build();
-            userRoleAssignments.add(userRoleAssignment);
-        });
-
-        user.setRoles(userRoleAssignments);
+        UserRoleAssignment userRoleAssignment = UserRoleAssignment.builder()
+                .user(user)
+                .role(userCreatingDTO.getRole())
+                .build();
+        user.setUserRoleAssignment(userRoleAssignment);
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 
@@ -89,18 +82,11 @@ public class UserServiceImpl implements UserService {
         if (userCreatingDTO.getUsername() != null)
             user.setUsername(userCreatingDTO.getUsername());
 
-        List<UserRoleAssignment> userRoleAssignments = new ArrayList<>();
-        List<Role> assignedRoles = userCreatingDTO.getRoles();
-
-        assignedRoles.forEach(assignedRole -> {
-            UserRoleAssignment userRoleAssignment = UserRoleAssignment.builder()
-                    .role(assignedRole)
-                    .users(user)
-                    .build();
-            userRoleAssignments.add(userRoleAssignment);
-        });
-
-        user.setRoles(userRoleAssignments);
+        if(user.getUserRoleAssignment().getUser() == user){
+            if(userCreatingDTO.getRole() !=  user.getUserRoleAssignment().getRole()) {
+                user.getUserRoleAssignment().setRole(userCreatingDTO.getRole());
+            }
+        }
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 

@@ -1,11 +1,14 @@
 package com.personalproject.companyclassroom.rest.api;
 
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("/api/classrooms")
@@ -21,4 +24,8 @@ public interface ClassroomAPI {
 
     @DeleteMapping("/{classroomId}")
     void deleteClassroomById(@PathVariable("classroomId") Long classroomId);
+
+    @GetMapping("/active-classes")
+    ResponseEntity<List<CustomClassroomDTO>> findActiveClassesAndNumberOfStudents(@RequestParam("role") Role role,
+                                                                                  @RequestParam("date") LocalDate date);
 }
