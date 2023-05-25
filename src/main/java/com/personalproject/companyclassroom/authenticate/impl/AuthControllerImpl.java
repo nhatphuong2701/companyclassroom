@@ -11,6 +11,7 @@ import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.security.service.impl.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
+    @Autowired
+    private UserService userService;
 
-    private final UserService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    private final AuthenticationManager authenticationManager;
-
-    private final JwtUtils jwtUtils;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     public ResponseEntity<?> authenticateUser(JwtRequest loginRequest) {
 

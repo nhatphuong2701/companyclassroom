@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.SubmissionAPI;
 import com.personalproject.companyclassroom.service.SubmissionService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.SubmissionCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.SubmissionDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,10 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class SubmissionResource implements SubmissionAPI {
+    @Autowired
+    private SubmissionService submissionService;
 
-    private final SubmissionService submissionService;
     @Override
     public ResponseEntity<List<SubmissionDTO>> getAllSubmissions() {
         return ResponseEntity.ok(submissionService.getAllSubmission());

@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.CourseAPI;
 import com.personalproject.companyclassroom.service.CourseService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,10 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class CourseResource implements CourseAPI {
+    @Autowired
+    private CourseService courseService;
 
-    private final CourseService courseService;
     @Override
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());

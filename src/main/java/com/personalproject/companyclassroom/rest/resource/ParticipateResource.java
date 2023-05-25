@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.ParticipateAPI;
 import com.personalproject.companyclassroom.service.ParticipateService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class ParticipateResource implements ParticipateAPI {
-
-    private final ParticipateService participateService;
+    @Autowired
+    private ParticipateService participateService;
 
     @Override
     public ResponseEntity<List<ParticipateDTO>> getAllParticipation() {

@@ -5,24 +5,30 @@ import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
+import com.personalproject.companyclassroom.security.repository.UserRoleAssignmentRepository;
 import com.personalproject.companyclassroom.security.service.UserService;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.security.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
     public List<UserDTO> getAllUsers() {
@@ -31,6 +37,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserCreatingDTO userCreatingDTO) {
+        if(userCreatingDTO.getFirstName().isBlank() ||
+                userCreatingDTO.getLastName().isBlank() ||
+                userCreatingDTO.getUsername().isBlank() ){
+            throw CompanyClassroomException.badRequest("InvalidInput",
+                    "User's first name, last name and username must be filled");
+        }
+
+        if (userCreatingDTO.getUsername().length() >= 15) {
+            throw CompanyClassroomException.badRequest("InvalidUsername","User name must not be longer than 15 symbols");
+        }
+
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
                 .lastName(userCreatingDTO.getLastName())
@@ -41,6 +58,7 @@ public class UserServiceImpl implements UserService {
                 .dateOfBirth(userCreatingDTO.getDateOfBirth())
                 .avatar(userCreatingDTO.getAvatar())
                 .build();
+
         List<UserRoleAssignment> userRoleAssignments = new ArrayList<>();
         List<Role> assignedRoles = userCreatingDTO.getRoles();
         assignedRoles.forEach(assignedRole -> {
@@ -56,15 +74,48 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUserById(Long id, UserCreatingDTO userCreatingDTO) {
-        User user = userRepository.findById(id).orElseThrow(CompanyClassroomException::userNotFound);
-        user.setFirstName(userCreatingDTO.getFirstName());
-        user.setLastName(userCreatingDTO.getLastName());
-        user.setEmail(userCreatingDTO.getEmail());
-        user.setGender(userCreatingDTO.getGender());
-        user.setDateOfBirth(userCreatingDTO.getDateOfBirth());
-        user.setUsername(userCreatingDTO.getUsername());
-        user.setPassword(userCreatingDTO.getPassword());
+    public UserDTO updateUserByIdForAdmin(Long userId, UserCreatingDTO userCreatingDTO) {
+        User user = userRepository.findById(userId).orElseThrow(CompanyClassroomException::userNotFound);
+        if (userCreatingDTO.getFirstName() != null)
+            user.setFirstName(userCreatingDTO.getFirstName());
+        if (userCreatingDTO.getLastName() != null)
+            user.setLastName(userCreatingDTO.getLastName());
+        if (userCreatingDTO.getGender() != null)
+            user.setGender(userCreatingDTO.getGender());
+        if (userCreatingDTO.getDateOfBirth() != null)
+            user.setDateOfBirth(userCreatingDTO.getDateOfBirth());
+        if (userCreatingDTO.getEmail() != null)
+            user.setEmail(userCreatingDTO.getEmail());
+        if (userCreatingDTO.getUsername() != null)
+            user.setUsername(userCreatingDTO.getUsername());
+
+        List<UserRoleAssignment> userRoleAssignments = new ArrayList<>();
+        List<Role> assignedRoles = userCreatingDTO.getRoles();
+
+        assignedRoles.forEach(assignedRole -> {
+            UserRoleAssignment userRoleAssignment = UserRoleAssignment.builder()
+                    .role(assignedRole)
+                    .users(user)
+                    .build();
+            userRoleAssignments.add(userRoleAssignment);
+        });
+
+        user.setRoles(userRoleAssignments);
+        return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
+    }
+
+    @Override
+    public UserDTO updateUserByIdForUser(Long userId, UserCreatingDTO userCreatingDTO) {
+        User user = userRepository.findById(userId).orElseThrow(CompanyClassroomException::userNotFound);
+
+        if (userCreatingDTO.getFirstName() != null)
+            user.setFirstName(userCreatingDTO.getFirstName());
+        if (userCreatingDTO.getLastName() != null)
+            user.setLastName(userCreatingDTO.getLastName());
+        if (userCreatingDTO.getGender() != null)
+            user.setGender(userCreatingDTO.getGender());
+        if (userCreatingDTO.getDateOfBirth() != null)
+            user.setDateOfBirth(userCreatingDTO.getDateOfBirth());
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 

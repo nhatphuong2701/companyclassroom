@@ -10,7 +10,9 @@ public interface UserService {
 
     UserDTO createUser(UserCreatingDTO userCreatingDTO);
 
-    UserDTO updateUserById(Long userId, UserCreatingDTO userCreatingDTO);
+    UserDTO updateUserByIdForAdmin(Long userId, UserCreatingDTO userCreatingDTO);
+
+    UserDTO updateUserByIdForUser(Long userId, UserCreatingDTO userCreatingDTO);
 
     void deleteUserById(Long id);
 

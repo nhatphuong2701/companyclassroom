@@ -1,7 +1,6 @@
 package com.personalproject.companyclassroom.security.service.dto;
 
 import com.personalproject.companyclassroom.security.entity.Gender;
-import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
 import lombok.Data;

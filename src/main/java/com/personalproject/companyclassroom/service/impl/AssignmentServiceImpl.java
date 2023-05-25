@@ -8,17 +8,18 @@ import com.personalproject.companyclassroom.service.AssignmentService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
 import com.personalproject.companyclassroom.service.mapper.AssignmentMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class AssignmentServiceImpl implements AssignmentService {
 
-    private final AssignmentRepository assignmentRepository;
-    private final ClassroomRepository classroomRepository;
+    @Autowired
+    private AssignmentRepository assignmentRepository;
+    @Autowired
+    private ClassroomRepository classroomRepository;
     @Override
     public List<AssignmentDTO> getAllAssignments() {
         return AssignmentMapper.ASSIGNMENT_MAPPER.toDtos(assignmentRepository.findAll());
@@ -40,11 +41,16 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public AssignmentDTO updateAssignmentById(Long assignmentId, AssignmentCreatingDTO assignmentCreatingDTO) {
         Assignment updatedAssignment = assignmentRepository.findById(assignmentId).orElseThrow(CompanyClassroomException::assignmentNotFound);
-        updatedAssignment.setName(assignmentCreatingDTO.getName());
-        updatedAssignment.setPoints(assignmentCreatingDTO.getPoints());
-        updatedAssignment.setAttachment(assignmentCreatingDTO.getAttachment());
-        updatedAssignment.setInstruction(assignmentCreatingDTO.getInstruction());
-        updatedAssignment.setDueDate(assignmentCreatingDTO.getDueDate());
+        if(assignmentCreatingDTO.getName() != null)
+            updatedAssignment.setName(assignmentCreatingDTO.getName());
+        if(assignmentCreatingDTO.getPoints() != null)
+            updatedAssignment.setPoints(assignmentCreatingDTO.getPoints());
+        if(assignmentCreatingDTO.getAttachment() != null)
+            updatedAssignment.setAttachment(assignmentCreatingDTO.getAttachment());
+        if(assignmentCreatingDTO.getInstruction() != null)
+            updatedAssignment.setInstruction(assignmentCreatingDTO.getInstruction());
+        if(assignmentCreatingDTO.getDueDate() != null)
+            updatedAssignment.setDueDate(assignmentCreatingDTO.getDueDate());
         return AssignmentMapper.ASSIGNMENT_MAPPER.toDto(assignmentRepository.save(updatedAssignment));
     }
 

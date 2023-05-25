@@ -18,8 +18,11 @@ public interface UserAPI {
     @PostMapping
     ResponseEntity<UserDTO> createUser(@RequestBody UserCreatingDTO userCreatingDTO);
 
-    @PutMapping("/{userId}")
-    ResponseEntity<UserDTO> updateUserById(@PathVariable("teacherId") Long teacherId, @RequestBody UserCreatingDTO userCreatingDTO);
+    @PutMapping("/admin_updating/{userId}")
+    ResponseEntity<UserDTO> updateUserByIdForAdmin(@PathVariable("userId") Long teacherId, @RequestBody UserCreatingDTO userCreatingDTO);
+
+    @PutMapping("/user_updating/{userId}")
+    ResponseEntity<UserDTO> updateUserByIdForUser(@PathVariable("userId") Long teacherId, @RequestBody UserCreatingDTO userCreatingDTO);
 
     @DeleteMapping("/{userId}")
     void deleteUserById(@PathVariable("userId") Long id);

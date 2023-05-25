@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.CommentAPI;
 import com.personalproject.companyclassroom.service.CommentService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +12,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class CommentResource implements CommentAPI {
-
-    private final CommentService commentService;
-
+    @Autowired
+    private CommentService commentService;
 
     @Override
     public ResponseEntity<List<CommentDTO>> getAllComments() {

@@ -9,18 +9,21 @@ import com.personalproject.companyclassroom.service.ParticipateService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
 import com.personalproject.companyclassroom.service.mapper.ParticipateMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class ParticipateServiceImpl implements ParticipateService {
+    @Autowired
+    private ParticipateRepository participateRepository;
 
-    private final ParticipateRepository participateRepository;
-    private final UserRepository userRepository;
-    private final ClassroomRepository classroomRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ClassroomRepository classroomRepository;
 
     @Override
     public List<ParticipateDTO> getAllParticipation() {

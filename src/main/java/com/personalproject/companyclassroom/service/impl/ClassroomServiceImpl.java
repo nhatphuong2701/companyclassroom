@@ -54,12 +54,18 @@ public class ClassroomServiceImpl implements ClassroomService {
     public ClassroomDTO updateClassroomById(Long classroomId, ClassroomUpdatingDTO classroomUpdatingDTO) {
         Classroom updatedClassroom = classroomRepository.findById(classroomId).
                 orElseThrow(CompanyClassroomException::classroomNotFound);
-        updatedClassroom.setName(classroomUpdatingDTO.getName());
-        updatedClassroom.setCourse(courseRepository.findById(classroomUpdatingDTO.getCourseId()).
+
+        if(classroomUpdatingDTO.getName() != null)
+            updatedClassroom.setName(classroomUpdatingDTO.getName());
+        if(classroomUpdatingDTO.getCourseId() != null)
+            updatedClassroom.setCourse(courseRepository.findById(classroomUpdatingDTO.getCourseId()).
                 orElseThrow(CompanyClassroomException::courseNotFound));
-        updatedClassroom.setAcademicYear(classroomUpdatingDTO.getAcademicYear());
-        updatedClassroom.setStartDate(classroomUpdatingDTO.getStartDate());
-        updatedClassroom.setEndDate(classroomUpdatingDTO.getEndDate());
+        if(classroomUpdatingDTO.getAcademicYear() != null)
+            updatedClassroom.setAcademicYear(classroomUpdatingDTO.getAcademicYear());
+        if(classroomUpdatingDTO.getStartDate() != null)
+            updatedClassroom.setStartDate(classroomUpdatingDTO.getStartDate());
+        if(classroomUpdatingDTO.getEndDate() != null)
+            updatedClassroom.setEndDate(classroomUpdatingDTO.getEndDate());
         return ClassroomMapper.CLASSROOM_MAPPER.toDto(classroomRepository.save(updatedClassroom));
     }
 

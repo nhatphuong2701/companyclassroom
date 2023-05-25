@@ -9,17 +9,21 @@ import com.personalproject.companyclassroom.service.CommentService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 import com.personalproject.companyclassroom.service.mapper.CommentMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
+    @Autowired
+    private CommentRepository commentRepository;
 
-    private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
-    private final PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
     @Override
     public List<CommentDTO> getAllComments() {
         return CommentMapper.COMMENT_MAPPER.toDtos(commentRepository.findAll());
@@ -40,9 +44,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO updateCommentById(Long commentId, CommentCreatingDTO commentCreatingDTO) {
-        Comment updateComment = new Comment();
-        updateComment.setAttachment(commentCreatingDTO.getAttachment());
-        updateComment.setContent(commentCreatingDTO.getContent());
+        Comment updateComment = commentRepository.findById(commentId).orElseThrow(CompanyClassroomException::commentNotFound);
+        if(commentCreatingDTO.getAttachment() != null)
+            updateComment.setAttachment(commentCreatingDTO.getAttachment());
+        if(commentCreatingDTO.getAttachment() != null)
+            updateComment.setContent(commentCreatingDTO.getContent());
         return CommentMapper.COMMENT_MAPPER.toDto(commentRepository.save(updateComment));
     }
 

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,10 +31,12 @@ public class User {
     private Gender gender;
 
     private LocalDate dateOfBirth;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
-    private List<UserRoleAssignment> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "users", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private List<UserRoleAssignment> roles;
 
     @Column(unique = true, nullable = false)
     private String username;

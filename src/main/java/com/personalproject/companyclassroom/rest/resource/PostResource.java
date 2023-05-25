@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.PostAPI;
 import com.personalproject.companyclassroom.service.PostService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.PostCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.PostDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class PostResource implements PostAPI {
-
-    private final PostService postService;
+    @Autowired
+    private PostService postService;
 
     @Override
     public ResponseEntity<List<PostDTO>> getAllPosts(PostCreatingDTO postCreatingDTO) {

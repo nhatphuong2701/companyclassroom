@@ -9,18 +9,21 @@ import com.personalproject.companyclassroom.service.SubmissionService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.SubmissionCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.SubmissionDTO;
 import com.personalproject.companyclassroom.service.mapper.SubmissionMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class SubmissionServiceImpl implements SubmissionService {
+    @Autowired
+    private SubmissionRepository submissionRepository;
 
-    private final SubmissionRepository submissionRepository;
-    private  final UserRepository userRepository;
-    private final AssignmentRepository assignmentRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AssignmentRepository assignmentRepository;
 
     @Override
     public List<SubmissionDTO> getAllSubmission() {
@@ -40,8 +43,10 @@ public class SubmissionServiceImpl implements SubmissionService {
 
     @Override
     public SubmissionDTO updateSubmissionById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO) {
-        Submission updatedSubmission = submissionRepository.findById(submissionId).orElseThrow(CompanyClassroomException::submissionNotFound);
-        updatedSubmission.setPoints(submissionCreatingDTO.getPoints());
+        Submission updatedSubmission = submissionRepository.findById(submissionId).
+                orElseThrow(CompanyClassroomException::submissionNotFound);
+        if(submissionCreatingDTO.getPoints()!=null)
+            updatedSubmission.setPoints(submissionCreatingDTO.getPoints());
         return SubmissionMapper.SUBMISSION_MAPPER.toDto(submissionRepository.save(updatedSubmission));
     }
 

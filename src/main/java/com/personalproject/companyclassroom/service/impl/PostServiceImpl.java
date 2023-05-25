@@ -9,18 +9,21 @@ import com.personalproject.companyclassroom.service.PostService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.PostCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.PostDTO;
 import com.personalproject.companyclassroom.service.mapper.PostMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
+    @Autowired
+    private PostRepository postRepository;
 
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final ClassroomRepository classroomRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ClassroomRepository classroomRepository;
 
     @Override
     public List<PostDTO> getAllPosts() {
@@ -44,9 +47,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDTO updatePostById(Long postId, PostCreatingDTO postCreatingDTO) {
         Post updatedPost = postRepository.findById(postId).orElseThrow(CompanyClassroomException::postNotFound);
-        updatedPost.setTitle(postCreatingDTO.getTitle());
-        updatedPost.setAttachment(postCreatingDTO.getAttachment());
-        updatedPost.setContent(postCreatingDTO.getContent());
+        if(postCreatingDTO.getTitle() != null)
+            updatedPost.setTitle(postCreatingDTO.getTitle());
+        if(postCreatingDTO.getAttachment() != null)
+            updatedPost.setAttachment(postCreatingDTO.getAttachment());
+        if(postCreatingDTO.getContent() != null)
+            updatedPost.setContent(postCreatingDTO.getContent());
         return PostMapper.POST_MAPPER.toDto(postRepository.save(updatedPost));
     }
 

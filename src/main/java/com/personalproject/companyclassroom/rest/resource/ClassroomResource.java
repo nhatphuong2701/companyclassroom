@@ -6,8 +6,7 @@ import com.personalproject.companyclassroom.service.ClassroomService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ClassroomCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.ClassroomUpdatingDTO;
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +14,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
-
 public class ClassroomResource implements ClassroomAPI {
-
-    private final ClassroomService classroomService;
+    @Autowired
+    private ClassroomService classroomService;
 
     @Override
     public ResponseEntity<List<ClassroomDTO>> getAllClassrooms() {

@@ -4,7 +4,7 @@ import com.personalproject.companyclassroom.rest.api.AssignmentAPI;
 import com.personalproject.companyclassroom.service.AssignmentService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class AssignmentResource implements AssignmentAPI {
-
-    private final AssignmentService assignmentService;
+    @Autowired
+    private AssignmentService assignmentService;
 
     @Override
     public ResponseEntity<List<AssignmentDTO>> getAllAssignments() {

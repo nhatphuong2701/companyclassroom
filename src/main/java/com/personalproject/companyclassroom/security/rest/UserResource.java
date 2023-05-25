@@ -1,13 +1,12 @@
 package com.personalproject.companyclassroom.security.rest;
 
-
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.exception.ResponseException;
-import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.service.UserService;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class UserResource implements UserAPI {
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
     @Override
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
@@ -31,8 +31,13 @@ public class UserResource implements UserAPI {
     }
 
     @Override
-    public ResponseEntity<UserDTO> updateUserById(Long userId, UserCreatingDTO userCreatingDTO) {
-        return ResponseEntity.ok().body(userService.updateUserById(userId, userCreatingDTO));
+    public ResponseEntity<UserDTO> updateUserByIdForAdmin(Long userId, UserCreatingDTO userCreatingDTO) {
+        return ResponseEntity.ok().body(userService.updateUserByIdForAdmin(userId, userCreatingDTO));
+    }
+
+    @Override
+    public ResponseEntity<UserDTO> updateUserByIdForUser(Long userId, UserCreatingDTO userCreatingDTO) {
+        return ResponseEntity.ok().body(userService.updateUserByIdForUser(userId, userCreatingDTO));
     }
 
     @Override

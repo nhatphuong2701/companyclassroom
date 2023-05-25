@@ -3,7 +3,6 @@ package com.personalproject.companyclassroom.security.service.mapper;
 import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
