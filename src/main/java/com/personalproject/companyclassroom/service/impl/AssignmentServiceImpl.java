@@ -31,7 +31,8 @@ public class AssignmentServiceImpl implements AssignmentService {
                 .name(assignmentCreatingDTO.getName())
                 .dueDate(assignmentCreatingDTO.getDueDate())
                 .points(assignmentCreatingDTO.getPoints())
-                .classroom(classroomRepository.findById(assignmentCreatingDTO.getClassroomId()).orElseThrow(CompanyClassroomException::classroomNotFound))
+                .classroom(classroomRepository.findById(assignmentCreatingDTO.getClassroomId()).
+                        orElseThrow(CompanyClassroomException::classroomNotFound))
                 .instruction(assignmentCreatingDTO.getInstruction())
                 .attachment(assignmentCreatingDTO.getAttachment())
         .build();

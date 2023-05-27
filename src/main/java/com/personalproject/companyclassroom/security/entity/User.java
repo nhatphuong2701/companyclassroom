@@ -48,8 +48,4 @@ public class User {
     private String avatar;
 
     private Boolean active;
-
-    public void setUserRoleAssignment(UserRoleAssignment userRoleAssignment) {
-        this.userRoleAssignment = userRoleAssignment;
-    }
 }

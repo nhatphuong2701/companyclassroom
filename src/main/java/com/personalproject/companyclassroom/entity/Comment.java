@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,11 +25,11 @@ public class Comment {
 
     @CreationTimestamp
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime time;
 
     @Column(nullable = false)
     private String content;
-    private String attachment;
+    private List<String> attachments;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

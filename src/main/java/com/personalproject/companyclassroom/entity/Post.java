@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,12 +26,12 @@ public class Post {
 
     @CreationTimestamp
     @Column(nullable = false)
-    private LocalDate postDate;
+    private LocalDateTime postTime;
 
     @Column(nullable = false)
     private String content;
 
-    private String attachment;
+    private List<String> attachments;
     private String title;
 
     @ManyToOne

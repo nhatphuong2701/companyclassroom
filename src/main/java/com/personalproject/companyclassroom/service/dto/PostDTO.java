@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class PostDTO {
     private Long id;
     private LocalDate postDate;
     private String content;
-    private String attachment;
+    private List<String> attachments;
     private String title;
     private Classroom classroom;
     private User user;

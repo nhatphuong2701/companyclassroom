@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostCreatingDTO {
     private String content;
-    private String attachment;
+    private List<String> attachments;
     private String title;
     private Long userId;
     private Long classroomId;
