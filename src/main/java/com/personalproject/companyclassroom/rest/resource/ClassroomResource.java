@@ -47,4 +47,9 @@ public class ClassroomResource implements ClassroomAPI {
     public ResponseEntity<List<CustomClassroomDTO>> findActiveClassesAndNumberOfStudents(Role role, LocalDate date) {
         return ResponseEntity.ok(classroomService.findActiveClassesAndNumberOfStudents(role, date));
     }
+
+    @Override
+    public ResponseEntity<List<ClassroomDTO>> getClassroomsByCourseId(Long courseId) {
+        return ResponseEntity.ok(classroomService.getClassroomsByCourseId(courseId));
+    }
 }

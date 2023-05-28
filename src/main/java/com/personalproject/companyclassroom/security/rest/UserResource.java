@@ -59,4 +59,9 @@ public class UserResource implements UserAPI {
             throw CompanyClassroomException.badRequest("USERNAME_DOES_NOT_EXIST", "Username does not exist");
         }
     }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Long classroomId) {
+        return ResponseEntity.ok(userService.getStudentsByClassroomId(classroomId));
+    }
 }

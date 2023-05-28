@@ -1,7 +1,9 @@
 package com.personalproject.companyclassroom.rest.api;
 
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

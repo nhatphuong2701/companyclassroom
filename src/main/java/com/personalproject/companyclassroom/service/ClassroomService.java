@@ -20,4 +20,6 @@ public interface ClassroomService {
     void deleteClassroomById(Long classroomId);
 
     List<CustomClassroomDTO> findActiveClassesAndNumberOfStudents(Role role, LocalDate date);
+
+    List<ClassroomDTO> getClassroomsByCourseId(Long courseId);
 }

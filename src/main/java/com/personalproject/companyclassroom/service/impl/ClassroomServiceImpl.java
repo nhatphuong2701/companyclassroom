@@ -81,4 +81,9 @@ public class ClassroomServiceImpl implements ClassroomService {
     public List<CustomClassroomDTO> findActiveClassesAndNumberOfStudents(Role role, LocalDate date) {
         return classroomRepository.findActiveClassesAndNumberOfStudents(role, date);
     }
+
+    @Override
+    public List<ClassroomDTO> getClassroomsByCourseId(Long courseId) {
+        return classroomRepository.getClassroomsByCourseId(courseId);
+    }
 }

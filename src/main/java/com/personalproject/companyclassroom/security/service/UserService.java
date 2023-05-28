@@ -19,4 +19,6 @@ public interface UserService {
     UserDTO getUserById(Long id);
 
     UserDTO getUserByUserName(String userName);
+
+    List<UserDTO> getStudentsByClassroomId(Long classroomId);
 }

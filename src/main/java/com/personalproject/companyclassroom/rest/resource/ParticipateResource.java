@@ -1,6 +1,7 @@
 package com.personalproject.companyclassroom.rest.resource;
 
 import com.personalproject.companyclassroom.rest.api.ParticipateAPI;
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.service.ParticipateService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.ParticipateCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.ParticipateDTO;
@@ -36,5 +37,10 @@ public class ParticipateResource implements ParticipateAPI {
     public void deleteParticipationById(Long participateId) {
         participateService.deleteParticipationById(participateId);
         ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Long classroomId) {
+        return null;
     }
 }

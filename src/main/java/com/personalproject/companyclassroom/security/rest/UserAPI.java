@@ -2,6 +2,7 @@ package com.personalproject.companyclassroom.security.rest;
 
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -32,4 +33,7 @@ public interface UserAPI {
 
     @GetMapping("/username")
     ResponseEntity<UserDTO> getUserByUsername(@RequestParam("username") String username);
+
+    @GetMapping("/student-from-classroom")
+    ResponseEntity<List<UserDTO>> getStudentsByClassroomId(@Param("classroomId") Long classroomId);
 }
