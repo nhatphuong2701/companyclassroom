@@ -1,6 +1,7 @@
 package com.personalproject.companyclassroom.rest.resource;
 
 import com.personalproject.companyclassroom.rest.api.AssignmentAPI;
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.service.AssignmentService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
@@ -36,5 +37,15 @@ public class AssignmentResource implements AssignmentAPI {
     public void deleteAssignmentById(Long assignmentId) {
         assignmentService.deleteAssignmentById(assignmentId);
         ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> getStudentHasNoSubmissionByAssignmentId(Long assignmentId) {
+        return ResponseEntity.ok(assignmentService.getStudentHasNoSubmissionByAssignmentId(assignmentId));
+    }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> getStudentHasSubmissionByAssignmentId(Long assignmentId) {
+        return ResponseEntity.ok(assignmentService.getStudentHasSubmissionByAssignmentId(assignmentId));
     }
 }

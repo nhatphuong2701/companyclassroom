@@ -7,7 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("/api/users")
@@ -44,4 +46,8 @@ public interface UserAPI {
     @PreAuthorize(value = "hasAnyRole('ADMIN','TEACHER')")
     @GetMapping("/student-from-classroom")
     ResponseEntity<List<UserDTO>> getStudentsByClassroomId(@Param("role") Role role, @Param("classroomId") Long classroomId);
+
+    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PostMapping("/import-students-from-file")
+    ResponseEntity<List<UserDTO>> importStudentsFromFile(@RequestBody MultipartFile file) throws IOException;
 }

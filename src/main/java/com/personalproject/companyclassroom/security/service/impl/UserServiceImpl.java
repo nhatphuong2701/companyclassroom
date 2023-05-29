@@ -1,6 +1,7 @@
 package com.personalproject.companyclassroom.security.service.impl;
 
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
+import com.personalproject.companyclassroom.security.entity.Gender;
 import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.entity.UserRoleAssignment;
@@ -12,9 +13,16 @@ import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.security.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +31,9 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
-
 
     private final PasswordEncoder passwordEncoder;
 
@@ -45,13 +53,12 @@ public class UserServiceImpl implements UserService {
         }
 
         if (userCreatingDTO.getUsername().length() >= 15) {
-            throw CompanyClassroomException.badRequest("InvalidUsername","User name must not be longer than 15 symbols");
+            throw CompanyClassroomException.badRequest("InvalidUsername",
+                    "User name must not be longer than 15 symbols");
         }
 
-        if (!(userCreatingDTO.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$"))) {
-            throw CompanyClassroomException.badRequest("InvalidPassword",
-                    "Password must have at least 1 lowercase, 1 uppercase, 1 numeric char, " +
-                            "1 special char, 8 chars to 16 chars");
+        if (userCreatingDTO.getPassword().length() > 24 || userCreatingDTO.getPassword().length() < 5) {
+            throw CompanyClassroomException.badRequest("InvalidPassword", "Password must contain 8 chars to 24 chars");
         }
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
@@ -68,6 +75,7 @@ public class UserServiceImpl implements UserService {
                 .role(userCreatingDTO.getRole())
                 .build();
         user.setUserRoleAssignment(userRoleAssignment);
+        logger.info("create user successfully");
         return UserMapper.USER_MAPPER.toDto(userRepository.save(user));
     }
 
@@ -134,5 +142,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getStudentsByClassroomId(Role role, Long classroomId) {
         return UserMapper.USER_MAPPER.toDtos(userRepository.getStudentsByClassroomId(role, classroomId));
+    }
+
+    @Override
+    public List<UserDTO> importStudentsFromFile(MultipartFile file) throws IOException {
+        List<User> students = new ArrayList<>();
+        XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+        XSSFSheet worksheet = workbook.getSheetAt(0);
+        logger.info("row number" + worksheet.getPhysicalNumberOfRows());
+        for(int i = 1; i < worksheet.getPhysicalNumberOfRows() ; i++) {
+            XSSFRow row = worksheet.getRow(i);
+            if(row.getCell(1).getStringCellValue() == null) break;
+
+            User student = new User();
+            UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
+
+            student.setFirstName(row.getCell(1).getStringCellValue());
+            student.setLastName(row.getCell(2).getStringCellValue());
+            student.setEmail(row.getCell(3).getStringCellValue());
+            student.setGender(Gender.valueOf(row.getCell(4).getStringCellValue()));
+            student.setDateOfBirth(LocalDate.parse(row.getCell(5).getStringCellValue()));
+            student.setAvatar(row.getCell(6).getStringCellValue());
+            student.setUsername(row.getCell(7).getStringCellValue());
+            student.setPassword(passwordEncoder.encode(row.getCell(8).getStringCellValue()));
+            userRoleAssignment.setRole(Role.valueOf(row.getCell(9).getStringCellValue()));
+            student.setUserRoleAssignment(userRoleAssignment);
+
+            students.add(student);
+        }
+
+        List<User> savedStudents = userRepository.saveAll(students);
+
+        return UserMapper.USER_MAPPER.toDtos(students);
     }
 }

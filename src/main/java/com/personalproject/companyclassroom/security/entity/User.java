@@ -46,5 +46,6 @@ public class User {
 
     private String avatar;
 
+    @Column(columnDefinition = "boolean default true")
     private Boolean active;
 }

@@ -1,5 +1,6 @@
 package com.personalproject.companyclassroom.rest.api;
 
+import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.AssignmentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,12 @@ public interface AssignmentAPI {
     @PreAuthorize(value = "hasAnyRole('TEACHER','ADMIN')")
     @DeleteMapping("/{assignmentId}")
     void deleteAssignmentById(@PathVariable("assignmentId") Long assignmentId);
+
+    @PreAuthorize(value = "hasAnyRole('TEACHER','ADMIN')")
+    @GetMapping("/student-has-no-submission")
+    ResponseEntity<List<UserDTO>> getStudentHasNoSubmissionByAssignmentId(@RequestParam("assignmentId") Long assignmentId);
+
+    @PreAuthorize(value = "hasAnyRole('TEACHER','ADMIN')")
+    @GetMapping("/student-has-submission")
+    ResponseEntity<List<UserDTO>> getStudentHasSubmissionByAssignmentId(@RequestParam("assignmentId") Long assignmentId);
 }

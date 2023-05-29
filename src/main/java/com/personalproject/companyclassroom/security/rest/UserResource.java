@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -64,5 +66,10 @@ public class UserResource implements UserAPI {
     @Override
     public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Role role, Long classroomId) {
         return ResponseEntity.ok(userService.getStudentsByClassroomId(role, classroomId));
+    }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> importStudentsFromFile(MultipartFile file) throws IOException {
+        return ResponseEntity.ok(userService.importStudentsFromFile(file));
     }
 }
