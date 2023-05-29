@@ -1,9 +1,11 @@
 package com.personalproject.companyclassroom.rest.resource;
 
 import com.personalproject.companyclassroom.rest.api.CourseAPI;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.service.CourseService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomCourseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +38,10 @@ public class CourseResource implements CourseAPI {
     public void deleteCourse(Long courseId) {
         courseService.deleteCourse(courseId);
         ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<CustomCourseDTO>> getCourseWithNumberOfClassesAndStudents(Role studentRole) {
+        return ResponseEntity.ok(courseService.getCourseWithNumberOfClassesAndStudents(studentRole));
     }
 }

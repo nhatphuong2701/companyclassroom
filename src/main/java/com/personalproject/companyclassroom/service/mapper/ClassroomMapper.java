@@ -19,5 +19,4 @@ public interface ClassroomMapper {
     ClassroomDTO toDto (Classroom classroom);
 
     List<ClassroomDTO> toDtos (List<Classroom> classrooms);
-
 }

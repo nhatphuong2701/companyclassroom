@@ -16,11 +16,9 @@ import java.time.LocalDate;
 @Table(name = "classrooms")
 @NamedQuery(name = "Classroom.findActiveClassesAndNumberOfStudents",
         query = "SELECT new com.personalproject.companyclassroom.service.dto.customDTO.CustomClassroomDTO" +
-                "(c, (SELECT COUNT(r.user) " +
-                "FROM UserRoleAssignment r " +
-                "WHERE r.role LIKE ?1)) " +
-        "FROM Classroom c, Participate p , User u " +
-        "WHERE c.id = p.classroom.id AND p.user.id = u.id and c.endDate > ?2 " +
+                "(c, COUNT(r.user)) " +
+                "FROM UserRoleAssignment r, Participate p, Classroom c " +
+                "WHERE r.role LIKE ?1 and r.user.id = p.user.id and c.id = p.classroom.id and c.endDate > ?2 " +
         "GROUP BY c.id ")
 public class Classroom {
     @Id

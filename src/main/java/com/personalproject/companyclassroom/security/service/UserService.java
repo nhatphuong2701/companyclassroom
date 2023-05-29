@@ -1,5 +1,6 @@
 package com.personalproject.companyclassroom.security.service;
 
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 
@@ -20,5 +21,5 @@ public interface UserService {
 
     UserDTO getUserByUserName(String userName);
 
-    List<UserDTO> getStudentsByClassroomId(Long classroomId);
+    List<UserDTO> getStudentsByClassroomId(Role role, Long classroomId);
 }

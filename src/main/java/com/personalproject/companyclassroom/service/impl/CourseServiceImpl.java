@@ -3,9 +3,11 @@ package com.personalproject.companyclassroom.service.impl;
 import com.personalproject.companyclassroom.entity.Course;
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.CourseRepository;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.service.CourseService;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CourseCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CourseDTO;
+import com.personalproject.companyclassroom.service.dto.customDTO.CustomCourseDTO;
 import com.personalproject.companyclassroom.service.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +53,10 @@ public class CourseServiceImpl implements CourseService {
     public void deleteCourse(Long courseId) {
         courseRepository.findById(courseId).orElseThrow(CompanyClassroomException::courseNotFound);
         courseRepository.deleteById(courseId);
+    }
+
+    @Override
+    public List<CustomCourseDTO> getCourseWithNumberOfClassesAndStudents(Role studentRole) {
+        return courseRepository.getCourseWithNumberOfClassesAndStudents(studentRole);
     }
 }

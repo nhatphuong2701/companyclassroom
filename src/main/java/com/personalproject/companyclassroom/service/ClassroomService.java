@@ -22,4 +22,6 @@ public interface ClassroomService {
     List<CustomClassroomDTO> findActiveClassesAndNumberOfStudents(Role role, LocalDate date);
 
     List<ClassroomDTO> getClassroomsByCourseId(Long courseId);
+
+    List<ClassroomDTO> findByEndDateBefore(LocalDate date);
 }

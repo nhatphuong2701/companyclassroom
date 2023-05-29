@@ -14,4 +14,6 @@ public interface PostService {
     PostDTO updatePostById (Long postId, PostCreatingDTO postCreatingDTO);
 
     void deletePostById (Long postId);
+
+    List<PostDTO> searchPost(String keyword);
 }

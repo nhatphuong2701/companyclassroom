@@ -1,5 +1,6 @@
 package com.personalproject.companyclassroom.security.repository;
 
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.entity.User;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
-    @Query(value = "SELECT (SELECT r.user FROM UserRoleAssignment r where r.role like 'ROLE_STUDENT') " +
-            "FROM User u, Participate p where u.id = p.user.id and p.classroom.id = :classroomId")
-    List<UserDTO> getStudentsByClassroomId(@Param("classroomId") Long classroomId);
+    @Query(value = "SELECT u " +
+            "FROM UserRoleAssignment r, User u, Participate p " +
+            "WHERE r.role like :role AND u.id = p.user.id and " +
+            "u.id = r.user.id and p.classroom.id = :classroomId")
+    List<User> getStudentsByClassroomId(@Param("role") Role role, @Param("classroomId") Long classroomId);
 }

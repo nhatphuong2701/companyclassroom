@@ -28,8 +28,8 @@ public class SubmissionResource implements SubmissionAPI {
     }
 
     @Override
-    public ResponseEntity<SubmissionDTO> updateSubmissionById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO) {
-        return ResponseEntity.ok().body(submissionService.updateSubmissionById(submissionId,submissionCreatingDTO));
+    public ResponseEntity<SubmissionDTO> updateSubmissionPointById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO) {
+        return ResponseEntity.ok().body(submissionService.updateSubmissionPointById(submissionId,submissionCreatingDTO));
     }
 
     @Override

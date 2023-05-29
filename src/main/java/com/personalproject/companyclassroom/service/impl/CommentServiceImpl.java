@@ -1,13 +1,16 @@
 package com.personalproject.companyclassroom.service.impl;
 
 import com.personalproject.companyclassroom.entity.Comment;
+import com.personalproject.companyclassroom.entity.Post;
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.repository.CommentRepository;
 import com.personalproject.companyclassroom.repository.PostRepository;
 import com.personalproject.companyclassroom.security.repository.UserRepository;
 import com.personalproject.companyclassroom.service.CommentService;
+import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
+import com.personalproject.companyclassroom.service.mapper.ClassroomMapper;
 import com.personalproject.companyclassroom.service.mapper.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +59,11 @@ public class CommentServiceImpl implements CommentService {
     public void deleteCommentById(Long commentId) {
         commentRepository.findById(commentId);
         commentRepository.deleteById(commentId);
+    }
+
+    @Override
+    public List<CommentDTO> findByPostId(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(CompanyClassroomException::postNotFound);
+        return CommentMapper.COMMENT_MAPPER.toDtos(commentRepository.findByPost(post));
     }
 }

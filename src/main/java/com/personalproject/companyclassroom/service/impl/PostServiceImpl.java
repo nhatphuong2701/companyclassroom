@@ -61,4 +61,9 @@ public class PostServiceImpl implements PostService {
         postRepository.findById(postId).orElseThrow(CompanyClassroomException::postNotFound);
         postRepository.deleteById(postId);
     }
+
+    @Override
+    public List<PostDTO> searchPost(String keyword) {
+        return PostMapper.POST_MAPPER.toDtos(postRepository.searchPost(keyword));
+    }
 }

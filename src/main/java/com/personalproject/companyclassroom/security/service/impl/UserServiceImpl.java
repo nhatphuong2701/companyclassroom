@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getStudentsByClassroomId(Long classroomId) {
-        return userRepository.getStudentsByClassroomId(classroomId);
+    public List<UserDTO> getStudentsByClassroomId(Role role, Long classroomId) {
+        return UserMapper.USER_MAPPER.toDtos(userRepository.getStudentsByClassroomId(role, classroomId));
     }
 }

@@ -42,7 +42,7 @@ public class SubmissionServiceImpl implements SubmissionService {
     }
 
     @Override
-    public SubmissionDTO updateSubmissionById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO) {
+    public SubmissionDTO updateSubmissionPointById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO) {
         Submission updatedSubmission = submissionRepository.findById(submissionId).
                 orElseThrow(CompanyClassroomException::submissionNotFound);
         if(submissionCreatingDTO.getPoints()!=null)

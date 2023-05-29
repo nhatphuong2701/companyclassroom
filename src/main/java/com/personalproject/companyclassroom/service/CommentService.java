@@ -1,5 +1,6 @@
 package com.personalproject.companyclassroom.service;
 
+import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 
@@ -14,4 +15,6 @@ public interface CommentService {
     CommentDTO updateCommentById(Long commentId, CommentCreatingDTO commentCreatingDTO);
 
     void deleteCommentById(Long commentId);
+
+    List<CommentDTO> findByPostId(Long postId);
 }

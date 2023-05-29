@@ -2,6 +2,7 @@ package com.personalproject.companyclassroom.rest.resource;
 
 import com.personalproject.companyclassroom.rest.api.CommentAPI;
 import com.personalproject.companyclassroom.service.CommentService;
+import com.personalproject.companyclassroom.service.dto.ClassroomDTO;
 import com.personalproject.companyclassroom.service.dto.creatingDTO.CommentCreatingDTO;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class CommentResource implements CommentAPI {
     public void deleteCommentById(Long commentId) {
         commentService.deleteCommentById(commentId);
         ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<List<CommentDTO>> findByPost(Long postId) {
+        return ResponseEntity.ok(commentService.findByPostId(postId));
     }
 }

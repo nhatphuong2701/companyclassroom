@@ -2,6 +2,7 @@ package com.personalproject.companyclassroom.security.rest;
 
 import com.personalproject.companyclassroom.exception.CompanyClassroomException;
 import com.personalproject.companyclassroom.exception.ResponseException;
+import com.personalproject.companyclassroom.security.entity.Role;
 import com.personalproject.companyclassroom.security.service.UserService;
 import com.personalproject.companyclassroom.security.service.dto.UserCreatingDTO;
 import com.personalproject.companyclassroom.security.service.dto.UserDTO;
@@ -61,7 +62,7 @@ public class UserResource implements UserAPI {
     }
 
     @Override
-    public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Long classroomId) {
-        return ResponseEntity.ok(userService.getStudentsByClassroomId(classroomId));
+    public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Role role, Long classroomId) {
+        return ResponseEntity.ok(userService.getStudentsByClassroomId(role, classroomId));
     }
 }

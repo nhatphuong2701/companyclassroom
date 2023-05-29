@@ -84,6 +84,13 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public List<ClassroomDTO> getClassroomsByCourseId(Long courseId) {
-        return classroomRepository.getClassroomsByCourseId(courseId);
+        return ClassroomMapper.CLASSROOM_MAPPER.toDtos(classroomRepository.getClassroomsByCourseId(courseId));
     }
+
+    @Override
+    public List<ClassroomDTO> findByEndDateBefore(LocalDate date) {
+        return ClassroomMapper.CLASSROOM_MAPPER.toDtos(classroomRepository.findByEndDateBefore(date));
+    }
+
+
 }

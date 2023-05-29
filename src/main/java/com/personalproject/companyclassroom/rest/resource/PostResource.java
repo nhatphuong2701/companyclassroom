@@ -37,4 +37,9 @@ public class PostResource implements PostAPI {
         postService.deletePostById(postId);
         ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<List<PostDTO>> searchPost(String keyword) {
+        return ResponseEntity.ok(postService.searchPost(keyword));
+    }
 }

@@ -52,4 +52,9 @@ public class ClassroomResource implements ClassroomAPI {
     public ResponseEntity<List<ClassroomDTO>> getClassroomsByCourseId(Long courseId) {
         return ResponseEntity.ok(classroomService.getClassroomsByCourseId(courseId));
     }
+
+    @Override
+    public ResponseEntity<List<ClassroomDTO>> findByEndDateBefore(LocalDate date) {
+        return ResponseEntity.ok(classroomService.findByEndDateBefore(date));
+    }
 }

@@ -17,5 +17,7 @@ public interface ClassroomRepository extends JpaRepository<Classroom, Long> {
     List<CustomClassroomDTO> findActiveClassesAndNumberOfStudents(Role role, LocalDate date);
 
     @Query(value = "SELECT c FROM Classroom c where c.course.id = :courseId")
-    List<ClassroomDTO> getClassroomsByCourseId(@Param("courseId") Long courseId);
+    List<Classroom> getClassroomsByCourseId(@Param("courseId") Long courseId);
+
+    List<Classroom> findByEndDateBefore(LocalDate date);
 }

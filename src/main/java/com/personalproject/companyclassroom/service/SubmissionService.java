@@ -11,7 +11,7 @@ public interface SubmissionService {
 
     SubmissionDTO createSubmission(SubmissionCreatingDTO submissionCreatingDTO);
 
-    SubmissionDTO updateSubmissionById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO);
+    SubmissionDTO updateSubmissionPointById(Long submissionId, SubmissionCreatingDTO submissionCreatingDTO);
 
     void deleteSubmissionById(Long submissionId);
 }
