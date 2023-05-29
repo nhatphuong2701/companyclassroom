@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Builder
@@ -35,7 +34,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserRoleAssignment userRoleAssignment;
 
     @Column(unique = true, nullable = false)

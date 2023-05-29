@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostCreatingDTO {
     private String content;
-    private List<String> attachments;
+    private String attachment;
     private String title;
     private Long userId;
     private Long classroomId;

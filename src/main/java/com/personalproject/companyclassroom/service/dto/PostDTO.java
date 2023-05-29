@@ -16,8 +16,8 @@ public class PostDTO {
     private Long id;
     private LocalDate postDate;
     private String content;
-    private List<String> attachments;
+    private String attachment;
     private String title;
-    private Classroom classroom;
-    private User user;
+    private Long classroomId;
+    private Long userId;
 }

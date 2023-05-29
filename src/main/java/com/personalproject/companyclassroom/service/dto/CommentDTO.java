@@ -17,7 +17,7 @@ public class CommentDTO {
     private Long id;
     private LocalDateTime time;
     private String content;
-    private List<String> attachments;
-    private Post post;
-    private User user;
+    private String attachment;
+    private Long postId;
+    private Long userId;
 }

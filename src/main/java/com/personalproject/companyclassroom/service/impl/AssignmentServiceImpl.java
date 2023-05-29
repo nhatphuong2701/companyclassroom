@@ -29,7 +29,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     public AssignmentDTO createAssignment(AssignmentCreatingDTO assignmentCreatingDTO) {
         Assignment newAssignment = Assignment.builder()
                 .name(assignmentCreatingDTO.getName())
-                .dueDate(assignmentCreatingDTO.getDueDate())
+                .dueTime(assignmentCreatingDTO.getDueTime())
                 .points(assignmentCreatingDTO.getPoints())
                 .classroom(classroomRepository.findById(assignmentCreatingDTO.getClassroomId()).
                         orElseThrow(CompanyClassroomException::classroomNotFound))
@@ -50,8 +50,8 @@ public class AssignmentServiceImpl implements AssignmentService {
             updatedAssignment.setAttachment(assignmentCreatingDTO.getAttachment());
         if(assignmentCreatingDTO.getInstruction() != null)
             updatedAssignment.setInstruction(assignmentCreatingDTO.getInstruction());
-        if(assignmentCreatingDTO.getDueDate() != null)
-            updatedAssignment.setDueDate(assignmentCreatingDTO.getDueDate());
+        if(assignmentCreatingDTO.getDueTime() != null)
+            updatedAssignment.setDueTime(assignmentCreatingDTO.getDueTime());
         return AssignmentMapper.ASSIGNMENT_MAPPER.toDto(assignmentRepository.save(updatedAssignment));
     }
 

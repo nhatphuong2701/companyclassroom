@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
                 .post(postRepository.findById(commentCreatingDTO.getPostId()).
                         orElseThrow(CompanyClassroomException::postNotFound))
                 .content(commentCreatingDTO.getContent())
-                .attachments(commentCreatingDTO.getAttachments())
+                .attachment(commentCreatingDTO.getAttachment())
                 .build();
         return CommentMapper.COMMENT_MAPPER.toDto(commentRepository.save(newComment));
     }
@@ -45,9 +45,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDTO updateCommentById(Long commentId, CommentCreatingDTO commentCreatingDTO) {
         Comment updateComment = commentRepository.findById(commentId).orElseThrow(CompanyClassroomException::commentNotFound);
-        if(commentCreatingDTO.getAttachments() != null)
-            updateComment.setAttachments(commentCreatingDTO.getAttachments());
-        if(commentCreatingDTO.getAttachments() != null)
+        if(commentCreatingDTO.getAttachment() != null)
+            updateComment.setAttachment(commentCreatingDTO.getAttachment());
+        if(commentCreatingDTO.getAttachment() != null)
             updateComment.setContent(commentCreatingDTO.getContent());
         return CommentMapper.COMMENT_MAPPER.toDto(commentRepository.save(updateComment));
     }

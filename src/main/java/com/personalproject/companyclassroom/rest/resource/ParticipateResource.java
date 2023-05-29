@@ -38,9 +38,4 @@ public class ParticipateResource implements ParticipateAPI {
         participateService.deleteParticipationById(participateId);
         ResponseEntity.noContent().build();
     }
-
-    @Override
-    public ResponseEntity<List<UserDTO>> getStudentsByClassroomId(Long classroomId) {
-        return null;
-    }
 }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,8 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
-    private List<String> attachments;
+
+    private String attachment;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

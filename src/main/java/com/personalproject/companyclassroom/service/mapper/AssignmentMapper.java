@@ -5,6 +5,7 @@ import com.personalproject.companyclassroom.entity.Submission;
 import com.personalproject.companyclassroom.service.dto.AssignmentDTO;
 import com.personalproject.companyclassroom.service.dto.SubmissionDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AssignmentMapper {
     AssignmentMapper ASSIGNMENT_MAPPER = Mappers.getMapper(AssignmentMapper.class);
+
+    @Mapping(target = "classroomId", source = "classroom.id")
 
     AssignmentDTO toDto (Assignment assignment);
 

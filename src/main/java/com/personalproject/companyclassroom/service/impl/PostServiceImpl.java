@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
         Post post = Post.builder()
                 .title(postCreatingDTO.getTitle())
                 .content(postCreatingDTO.getContent())
-                .attachments(postCreatingDTO.getAttachments())
+                .attachment(postCreatingDTO.getAttachment())
                 .user(userRepository.findById(postCreatingDTO.getUserId()).
                         orElseThrow(CompanyClassroomException::userNotFound))
                 .classroom(classroomRepository.findById(postCreatingDTO.getClassroomId()).
@@ -49,8 +49,8 @@ public class PostServiceImpl implements PostService {
         Post updatedPost = postRepository.findById(postId).orElseThrow(CompanyClassroomException::postNotFound);
         if(postCreatingDTO.getTitle() != null)
             updatedPost.setTitle(postCreatingDTO.getTitle());
-        if(postCreatingDTO.getAttachments() != null)
-            updatedPost.setAttachments(postCreatingDTO.getAttachments());
+        if(postCreatingDTO.getAttachment() != null)
+            updatedPost.setAttachment(postCreatingDTO.getAttachment());
         if(postCreatingDTO.getContent() != null)
             updatedPost.setContent(postCreatingDTO.getContent());
         return PostMapper.POST_MAPPER.toDto(postRepository.save(updatedPost));

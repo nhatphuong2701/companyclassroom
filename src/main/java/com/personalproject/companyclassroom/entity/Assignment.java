@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -22,7 +23,7 @@ public class Assignment {
     @Column(nullable = false)
     private String name;
 
-    private LocalDate dueDate;
+    private LocalDateTime dueTime;
     private String attachment;
     private String instruction;
     private Long points;

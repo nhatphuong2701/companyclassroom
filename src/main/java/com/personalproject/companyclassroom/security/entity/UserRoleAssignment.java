@@ -1,5 +1,6 @@
 package com.personalproject.companyclassroom.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +25,10 @@ public class UserRoleAssignment {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnore
-    @ManyToOne
+
+    @OneToOne
     @JoinColumn(name="user_id")
+    @JsonBackReference
     private User user;
 
     @CreationTimestamp

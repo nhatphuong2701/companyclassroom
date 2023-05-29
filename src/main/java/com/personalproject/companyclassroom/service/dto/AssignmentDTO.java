@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -13,9 +14,9 @@ import java.time.LocalDate;
 public class AssignmentDTO {
     private Long id;
     private String name;
-    private LocalDate dueDate;
+    private LocalDateTime dueTime;
     private String attachment;
     private String instruction;
     private Long points;
-    private Classroom classroom;
+    private Long classroomId;
 }

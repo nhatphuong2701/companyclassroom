@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -23,7 +24,7 @@ public class Submission {
 
     @CreationTimestamp
     @Column(nullable = false)
-    private LocalTime time;
+    private LocalDateTime submitTime;
 
     private String note;
     private String attachment;

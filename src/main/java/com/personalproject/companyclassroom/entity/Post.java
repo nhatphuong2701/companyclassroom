@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-    private List<String> attachments;
+    private String attachment;
     private String title;
 
     @ManyToOne

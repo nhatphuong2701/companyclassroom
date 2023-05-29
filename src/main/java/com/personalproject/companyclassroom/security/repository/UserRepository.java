@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
     @Query(value = "SELECT (SELECT r.user FROM UserRoleAssignment r where r.role like 'ROLE_STUDENT') " +
-            "FROM User u, Participate p where u.id = p.userId and p.classroomId = :classroomId")
+            "FROM User u, Participate p where u.id = p.user.id and p.classroom.id = :classroomId")
     List<UserDTO> getStudentsByClassroomId(@Param("classroomId") Long classroomId);
 }

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParticipateDTO {
     private Long id;
-    private User user;
-    private Classroom classroom;
+    private Long userId;
+    private Long classroomId;
 }

@@ -3,6 +3,7 @@ package com.personalproject.companyclassroom.service.mapper;
 import com.personalproject.companyclassroom.entity.Comment;
 import com.personalproject.companyclassroom.service.dto.CommentDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public interface CommentMapper {
 
     CommentMapper COMMENT_MAPPER = Mappers.getMapper(CommentMapper.class);
+
+    @Mapping(target = "userId", source = "user.id")
 
     CommentDTO toDto (Comment comment);
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class CommentCreatingDTO {
     private LocalDateTime time;
     private String content;
-    private List<String> attachments;
+    private String attachment;
     private Long postId;
     private Long userId;
 }

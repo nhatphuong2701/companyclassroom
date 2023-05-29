@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
             throw CompanyClassroomException.badRequest("InvalidUsername","User name must not be longer than 15 symbols");
         }
 
+        if (!(userCreatingDTO.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$"))) {
+            throw CompanyClassroomException.badRequest("InvalidPassword",
+                    "Password must have at least 1 lowercase, 1 uppercase, 1 numeric char, " +
+                            "1 special char, 8 chars to 16 chars");
+        }
         User user = User.builder()
                 .firstName(userCreatingDTO.getFirstName())
                 .lastName(userCreatingDTO.getLastName())
