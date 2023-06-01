@@ -1,14 +1,13 @@
 package com.nonit.classroom.service.impl;
 
-import com.nonit.classroom.repository.UserRepository;
-import com.nonit.classroom.service.dto.creatingDTO.ParticipateCreatingDTO;
-import com.nonit.classroom.service.mapper.ParticipateMapper;
 import com.nonit.classroom.entity.Participate;
 import com.nonit.classroom.exception.ClassroomException;
 import com.nonit.classroom.repository.ClassRepository;
 import com.nonit.classroom.repository.ParticipateRepository;
+import com.nonit.classroom.repository.UserRepository;
 import com.nonit.classroom.service.ParticipateService;
 import com.nonit.classroom.service.dto.ParticipateDTO;
+import com.nonit.classroom.service.mapper.ParticipateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,7 @@ import java.util.List;
 
 @Service
 public class ParticipateServiceImpl implements ParticipateService {
+
     @Autowired
     private ParticipateRepository participateRepository;
 
@@ -27,34 +27,30 @@ public class ParticipateServiceImpl implements ParticipateService {
 
     @Override
     public List<ParticipateDTO> getAllParticipation() {
-        return ParticipateMapper.PARTICIPATE_MAPPER.toDtos(participateRepository.findAll());
+        return ParticipateMapper.INSTANCE.toDtos(participateRepository.findAll());
     }
 
     @Override
-    public ParticipateDTO createParticipation(ParticipateCreatingDTO participateCreatingDTO) {
+    public ParticipateDTO createParticipation(ParticipateDTO participateDTO) {
         Participate newParticipate = Participate.builder()
-                .user(userRepository.findById(participateCreatingDTO.getUserId()).
+                .user(userRepository.findById(participateDTO.getUserId()).
                         orElseThrow(ClassroomException::userNotFound))
-                .clazz(classRepository.findById(participateCreatingDTO.getClassroomId()).
+                .clazz(classRepository.findById(participateDTO.getClassId()).
                         orElseThrow(ClassroomException::classroomNotFound))
                 .build();
-        return ParticipateMapper.PARTICIPATE_MAPPER.toDto(participateRepository.save(newParticipate));
+        return ParticipateMapper.INSTANCE.toDto(participateRepository.save(newParticipate));
     }
 
     @Override
-    public ParticipateDTO updateParticipationById(Long participateId, ParticipateCreatingDTO participateCreatingDTO) {
-        Participate updateParticipate = participateRepository.findById(participateId).
+    public ParticipateDTO updateParticipation(Long participateId, ParticipateDTO participateDTO) {
+        Participate updatedParticipate = participateRepository.findById(participateId).
                 orElseThrow(ClassroomException::participationNotFound);
-        updateParticipate.setUser(userRepository.findById(participateCreatingDTO.getUserId()).
-                orElseThrow(ClassroomException::userNotFound));
-        updateParticipate.setClazz(classRepository.findById(participateCreatingDTO.getClassroomId()).
-                orElseThrow(ClassroomException::classroomNotFound));
-        return ParticipateMapper.PARTICIPATE_MAPPER.toDto(participateRepository.save(updateParticipate));
+        ParticipateMapper.INSTANCE.updateParticipationFromDTO(participateDTO, updatedParticipate);
+        return ParticipateMapper.INSTANCE.toDto(participateRepository.save(updatedParticipate));
     }
 
     @Override
-    public void deleteParticipationById(Long participateId) {
-        participateRepository.findById(participateId);
+    public void deleteParticipation(Long participateId) {
         participateRepository.deleteById(participateId);
     }
 }

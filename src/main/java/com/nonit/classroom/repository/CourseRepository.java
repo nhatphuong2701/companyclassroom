@@ -16,10 +16,10 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             "(c.name, COUNT(DISTINCT (cl.id)), COUNT(u.id))" +
             "FROM Clazz cl, Course c, Participate p, User u, UserRoleAssignment ura " +
             "WHERE cl.course.id = c.id " +
-            "AND p.classroom.id  = cl.id " +
+            "AND p.clazz.id  = cl.id " +
             "AND p.user.id = u.id " +
             "AND ura.user.id = u.id " +
             "AND ura.role = 'ROLE_STUDENT' " +
             "GROUP BY c.name")
-    List<CustomCourseDTO> getCourseWithNumberOfClassesAndStudents();
+    List<CustomCourseDTO> findCoursesWithNumberOfClassesAndStudents();
 }

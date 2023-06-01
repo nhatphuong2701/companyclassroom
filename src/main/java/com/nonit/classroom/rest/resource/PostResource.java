@@ -28,12 +28,12 @@ public class PostResource implements PostAPI {
     }
 
     @Override
-    public ResponseEntity<PostDTO> updatePostById(Long postId, PostDTO postDTO) {
+    public ResponseEntity<PostDTO> updatePost(Long postId, PostDTO postDTO) {
         return ResponseEntity.ok().body(postService.updatePost(postId, postDTO));
     }
 
     @Override
-    public ResponseEntity<Void> deleteById(Long postId) {
+    public ResponseEntity<Void> deletePost(Long postId) {
         postService.deletePost(postId);
         return ResponseEntity.noContent().build();
     }

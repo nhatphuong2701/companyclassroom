@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ParticipateDTO {
     private Long id;
     private Long userId;
-    private Long classroomId;
+    private Long classId;
 }

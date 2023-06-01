@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u " +
             "FROM UserRoleAssignment r, User u, Participate p " +
             "WHERE u.id = r.user.id AND u.id = p.user.id " +
-            "AND r.role like :role AND p.classroom.id = :classroomId")
-    List<User> getStudentsByClassroomId(@Param("role") Role role, @Param("classroomId") Long classroomId);
+            "AND r.role = 'ROLE_STUDENT' AND p.clazz.id = :classId")
+    List<User> getStudentsByClassroomId(@Param("classId") Long classId);
 }

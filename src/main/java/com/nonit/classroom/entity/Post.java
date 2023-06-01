@@ -33,7 +33,7 @@ public class Post {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "classroom_id", nullable = false)
+    @JoinColumn(name = "class_id", nullable = false)
     private Clazz clazz;
 
     @ManyToOne

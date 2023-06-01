@@ -22,11 +22,11 @@ public interface PostAPI {
 
     @PreAuthorize(HAS_ROLE_TEACHER_ADMIN)
     @PutMapping("/{postId}")
-    ResponseEntity<PostDTO> updatePostById(@PathVariable Long postId, @RequestBody PostDTO postDTO);
+    ResponseEntity<PostDTO> updatePost(@PathVariable Long postId, @RequestBody PostDTO postDTO);
 
     @PreAuthorize(HAS_ROLE_TEACHER_ADMIN)
     @DeleteMapping("/{postId}")
-    ResponseEntity<Void> deleteById(@PathVariable Long postId);
+    ResponseEntity<Void> deletePost(@PathVariable Long postId);
 
     @PreAuthorize(HAS_ANY_ROLE)
     @GetMapping("/search")

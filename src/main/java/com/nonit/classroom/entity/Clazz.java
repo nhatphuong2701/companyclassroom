@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Builder
 @Table(name = "classes")
 @NamedQuery(name = "Clazz.findActiveClassesAndNumberOfStudents",
-        query = "SELECT new com.nonit.classroom.service.dto.CustomClassDTO(c, COUNT(r.user) " +
+        query = "SELECT new com.nonit.classroom.service.dto.CustomClassDTO(c, COUNT(r.user)) " +
                 "FROM UserRoleAssignment r, Participate p, Clazz c " +
                 "WHERE r.user.id = p.user.id AND c.id = p.clazz.id " +
                 "AND r.role = 'ROLE_STUDENT' and c.endDate > ?2 " +
