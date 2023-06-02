@@ -19,6 +19,6 @@ public class ReplyResource implements ReplyAPI {
     @Override
     public ResponseEntity<Reply> createReply(ReplyDTO replyDTO, Long commentId, Long parentId) {
         Reply newReply = replyService.createReply(replyDTO, commentId, parentId);
-        return ResponseEntity.created(URI.create("api/{commentId}/{parentId}/reply/" + newReply.getId())).body(newReply);
+        return ResponseEntity.created(URI.create("api/replies/" + newReply.getId())).body(newReply);
     }
 }

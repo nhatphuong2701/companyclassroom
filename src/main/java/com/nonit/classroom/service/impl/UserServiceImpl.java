@@ -112,28 +112,30 @@ public class UserServiceImpl implements UserService {
         logger.info("row number" + worksheet.getPhysicalNumberOfRows());
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             XSSFRow row = worksheet.getRow(i);
-            if (row.getCell(1).getStringCellValue() == null) break;
 
-            User student = new User();
-            UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
+            if (row.getCell(0) == null) {
+                break;
+            }
 
-            student.setFirstName(row.getCell(1).getStringCellValue());
-            student.setLastName(row.getCell(2).getStringCellValue());
-            student.setEmail(row.getCell(3).getStringCellValue());
-            student.setGender(Gender.valueOf(row.getCell(4).getStringCellValue()));
-            student.setDateOfBirth(LocalDate.parse(row.getCell(5).getStringCellValue()));
-            student.setAvatar(row.getCell(6).getStringCellValue());
-            student.setUsername(row.getCell(7).getStringCellValue());
-            student.setPassword(passwordEncoder.encode(row.getCell(8).getStringCellValue()));
-            userRoleAssignment.setRole(Role.valueOf(row.getCell(9).getStringCellValue()));
-            student.setUserRoleAssignment(userRoleAssignment);
+                User student = new User();
+                UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
 
-            students.add(student);
-        }
+                student.setFirstName(row.getCell(0).getStringCellValue());
+                student.setLastName(row.getCell(1).getStringCellValue());
+                student.setEmail(row.getCell(2).getStringCellValue());
+                student.setGender(Gender.valueOf(row.getCell(3).getStringCellValue()));
+                student.setDateOfBirth(LocalDate.parse(row.getCell(4).getStringCellValue()));
+                student.setAvatar(row.getCell(5).getStringCellValue());
+                student.setUsername(row.getCell(6).getStringCellValue());
+                student.setPassword(passwordEncoder.encode(row.getCell(7).getStringCellValue()));
+                userRoleAssignment.setRole(Role.valueOf(row.getCell(8).getStringCellValue()));
+                userRoleAssignment.setUser(student);
+                student.setUserRoleAssignment(userRoleAssignment);
 
-        List<User> savedStudents = userRepository.saveAll(students);
+                students.add(student);
+            }
 
-        return UserMapper.INSTANCE.toDtos(students);
+        return UserMapper.INSTANCE.toDtos(userRepository.saveAll(students));
     }
 
     private static void checkDTO(UserDTO userDTO) {

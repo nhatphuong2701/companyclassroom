@@ -1,5 +1,6 @@
 package com.nonit.classroom.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,13 +35,14 @@ public class Post {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "class_id", nullable = false)
+    @JoinColumn(name = "class_id")
     private Clazz clazz;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Comment> comments;
 }

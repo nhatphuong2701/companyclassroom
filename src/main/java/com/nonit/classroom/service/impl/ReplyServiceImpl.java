@@ -32,11 +32,7 @@ public class ReplyServiceImpl implements ReplyService {
                 .comment((commentRepository.findById(commentId)
                         .orElseThrow(ClassroomException::commentNotFound)))
                 .build();
-        if (parentReply == null) {
-            newReply.addParentReply(newReply);
-        } else {
-            parentReply.getChildReplies().add(newReply);
-        }
+
         return replyRepository.save(newReply);
     }
 }

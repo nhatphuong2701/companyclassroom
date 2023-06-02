@@ -30,11 +30,10 @@ public class Submission {
     private Long points;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "assignment_id", nullable = false)
+    @JoinColumn(name = "assignment_id")
     private Assignment assignment;
-
 }

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "SELECT p FROM Post p WHERE p.title like %:keyword% or p.content like %:keyword%")
+    @Query(value = "SELECT p FROM Post p WHERE p.title LIKE %:keyword% OR p.content LIKE %:keyword%")
     List<Post> searchPost(@Param("keyword") String keyword);
 }

@@ -16,6 +16,7 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     @Mapping(target = "password", ignore = true)
+    @Mapping(target = "role", source = "userRoleAssignment.role")
     UserDTO toDto(User user);
 
     List<UserDTO> toDtos(List<User> users);
